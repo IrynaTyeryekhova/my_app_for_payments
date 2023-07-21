@@ -37,6 +37,7 @@ public class SpringConfig implements WebMvcConfigurer {
         templateResolver.setCharacterEncoding("UTF-8");
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/views/");
+//        templateResolver.setPrefix("/templates/");
         templateResolver.setSuffix(".html");
         return templateResolver;
     }
@@ -105,10 +106,10 @@ public class SpringConfig implements WebMvcConfigurer {
         return messageSource;
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/styles/css/stylesheet.css")
-                .addResourceLocations("classpath:/static/css/stylesheet.css");}
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("\\resources\\static\\css\\stylesheet.css")
+//                .addResourceLocations("classpath:src\\main\\webapp\\resources\\static\\css\\stylesheet.css");}
 //        registry.addResourceHandler("/images/**")
 //                .addResourceLocations("classpath:/static/images/");
 //        registry.addResourceHandler("/js/**")
