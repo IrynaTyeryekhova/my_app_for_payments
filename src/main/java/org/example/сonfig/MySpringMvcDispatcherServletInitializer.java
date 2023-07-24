@@ -10,7 +10,7 @@ import java.util.EnumSet;
 public class MySpringMvcDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{SpringConfig.class};
+        return null;
     }
 
     @Override
@@ -20,7 +20,7 @@ public class MySpringMvcDispatcherServletInitializer extends AbstractAnnotationC
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/"};
+        return new String[]{ "/"};
     }
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
@@ -28,7 +28,8 @@ public class MySpringMvcDispatcherServletInitializer extends AbstractAnnotationC
 
         super.onStartup(aServletContext);
 //        aServletContext.addFilter("characterSetFilter", new CharacterSetFilter()).addMappingForUrlPatterns(null, true, "/*");
-        addEncodingFilter(aServletContext);
+//        addEncodingFilter(aServletContext);
+
         registerHiddenFieldFilter(aServletContext);
     }
     private void registerHiddenFieldFilter(ServletContext aServletContext) {
@@ -47,7 +48,7 @@ public class MySpringMvcDispatcherServletInitializer extends AbstractAnnotationC
 
         FilterRegistration.Dynamic characterEncoding
                 = servletContext.addFilter("characterEncoding", characterEncodingFilter);
-        characterEncoding.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
+        characterEncoding.addMappingForUrlPatterns(dispatcherTypes, false, "/*");
         characterEncoding.setAsyncSupported(true);
     }
 

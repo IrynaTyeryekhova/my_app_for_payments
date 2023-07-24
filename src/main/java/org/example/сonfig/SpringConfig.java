@@ -36,7 +36,7 @@ public class SpringConfig implements WebMvcConfigurer {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setCharacterEncoding("UTF-8");
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/WEB-INF/views/");
+        templateResolver.setPrefix("classpath:/templates/");
 //        templateResolver.setPrefix("/templates/");
         templateResolver.setSuffix(".html");
         return templateResolver;
@@ -99,20 +99,20 @@ public class SpringConfig implements WebMvcConfigurer {
     @Bean
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-//        messageSource.setCacheSeconds(5); //refresh cache once per 5 sec
+        messageSource.setCacheSeconds(5); //refresh cache once per 5 sec
         messageSource.setDefaultEncoding("UTF-8");
         messageSource.setFallbackToSystemLocale(false);
         messageSource.setBasenames("classpath:resources");
         return messageSource;
     }
 
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("\\resources\\static\\css\\stylesheet.css")
-//                .addResourceLocations("classpath:src\\main\\webapp\\resources\\static\\css\\stylesheet.css");}
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/css/**")
+                .addResourceLocations("classpath:/static/css/");
 //        registry.addResourceHandler("/images/**")
 //                .addResourceLocations("classpath:/static/images/");
-//        registry.addResourceHandler("/js/**")
-//                .addResourceLocations("classpath:/static/js/");
+        registry.addResourceHandler("/static/js/**")
+                .addResourceLocations("classpath:/static/js/");}
 //    }
 }
