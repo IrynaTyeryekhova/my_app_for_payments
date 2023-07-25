@@ -2,10 +2,11 @@
 <html lang="${param.lang}" xmlns:th="http://thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title> th:title="#{text.login}"</title>
+    <title th:text="#{text.login}"> </title>
     <link type="text/css" th:href="@{static/css/stylesheet.css}" rel="stylesheet">
     <link type="text/css" th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
-    <script th:src="@{static/js/scriptLog.js}"></script>
+    <th:block th:utext="#{script.login}">h</th:block>
+
 </head>
 <body>
     <div class="sidenav">
