@@ -19,5 +19,11 @@ public class IndexController {
 
     @PostMapping("/indexLogin")
     public String indexLoginPost() { return "indexLogin"; }
+
+    @GetMapping("/indexRegister")
+    public String indexRegister() { return "indexRegister"; }
+
+    @PostMapping("/indexRegister")
+    public String indexRegisterPost() { return "indexRegister"; }
 }
 

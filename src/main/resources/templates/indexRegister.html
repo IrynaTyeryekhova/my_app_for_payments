@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="${param.lang}" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="#{text.register}"> </title>
+    <link type="text/css" th:href="@{static/css/stylesheet.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
+    <th:block th:utext="#{script.register}">script register</th:block>
+</head>
+<body>
+   <div class="sidenav">
+       <div class="login-main-text">
+           <h2><p th:text="#{name.app}"></p>
+               <p th:text="#{name.app.register}"></p>
+               _____________________________________________ <br>
+           </h2>
+
+           <p th:text="#{languageChangeText}" ></p>
+
+           <form name="formLog" th:action="@{#{languageChangeLink}}"  th:method="post">
+               <button type="submit" class="btn btn-black" th:text="#{languageChangeButton}" ></button>
+           </form>
+
+       </div>
+   </div>
+   <div class="main">
+         <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+               <form th:action="@{#{form.actionRegister}}"  target="_blanc" method="post">
+
+                  <div class="form-group">
+                      <label th:text="#{formName}"></label>
+                      <input type="text" class="form-control" th:placeholder="#{placeholderName}" name="ClientName">
+                  </div>
+
+                  <div class="form-group">
+                      <label th:text="#{formEMail}" ></label>
+                      <input type="email" class="form-control" required th:placeholder="#{placeholderEMail}" name="ClientEMail">
+                  </div>
+
+                  <div class="form-group">
+                      <label th:text="#{formPassword}" ></label>
+                      <input type="password" class="form-control" onchange="onChange()" required th:placeholder="#{placeholderPassword}" name="Password">
+                  </div>
+
+                  <div class="form-group">
+                       <label th:text="#{formPasswordConfirm}" ></label>
+                       <input type="password" class="form-control"  onchange="onChange()" required th:placeholder="#{placeholderPasswordConfirm}" name="Confirm">
+                  </div>
+
+                  <p th:text="#{formRequiredFields}" ></p>
+                  <button type="submit" onclick="onChange()" class="btn btn-blacktwo" th:text="#{text.register}" ></button>
+
+               </form>
+            </div>
+         </div>
+   </div>
+</body>
+</html>

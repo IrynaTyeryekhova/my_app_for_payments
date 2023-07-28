@@ -5,13 +5,12 @@
     <title>Application for payments</title>
     <link type="text/css" th:href="@{static/css/stylesheet.css}" rel="stylesheet">
     <link type="text/css" th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
-<!--    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
-<!--    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
 </head>
 <body>
 <div class="sidenav">
     <div class="login-main-text">
         <h2><p th:text="#{name.app}"></p><br> _____________________________________________ <br></h2>
+
         <p th:text="#{name.app.action}"></p>
 
         <form name="formLog" th:action="@{#{login.page}}" target="_blanc" th:method="get">
@@ -19,7 +18,7 @@
         </form>
         <br>
         <form name="formLog" th:action="@{#{register.page}}" target="_blanc" th:method="get">
-            <button type="submit" class="btn btn-black" th:text="#{button.register}"></button>
+            <button type="submit" class="btn btn-black" th:text="#{text.register}"></button>
         </form>
         <br> _____________________________________________ <br>
         <p th:text="#{languageChangeText}" ></p>

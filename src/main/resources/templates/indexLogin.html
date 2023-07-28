@@ -6,14 +6,15 @@
     <link type="text/css" th:href="@{static/css/stylesheet.css}" rel="stylesheet">
     <link type="text/css" th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
     <th:block th:utext="#{script.login}">h</th:block>
-
 </head>
 <body>
     <div class="sidenav">
         <div class="login-main-text">
             <h2><p th:text="#{name.app}"></p>
-            <p th:text="#{name.app.login}"></p>
-            _____________________________________________ <br></h2>
+                <p th:text="#{name.app.login}"></p>
+                _____________________________________________ <br>
+            </h2>
+
             <p th:text="#{languageChangeText}" ></p>
 
             <form name="formLog" th:action="@{#{languageChangeLink}}"  th:method="post">
