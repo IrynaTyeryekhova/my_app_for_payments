@@ -1,6 +1,8 @@
  function  onChange(){
-                         const email = document.querySelector('input[name=ClientEMail]');
-                         const password = document.querySelector('input[name=Password]');
+                         const email = document.querySelector('input[name=eMail]');
+                         const password = document.querySelector('input[name=password]');
+                         // let email = document.forms["form"]["eMail"].value;
+                         // let password = document.forms["form"]["password"].value;
 
 
                          var emptyField = '';

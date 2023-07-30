@@ -1,7 +1,9 @@
 package org.example.controllers;
 
+import org.example.entities.Client;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,10 +17,10 @@ public class IndexController {
     public String indexPost() { return "index"; }
 
     @GetMapping("/indexLogin")
-    public String indexLogin() { return "indexLogin"; }
+    public String indexLogin(@ModelAttribute("client") Client client) { return "indexLogin"; }
 
     @PostMapping("/indexLogin")
-    public String indexLoginPost() { return "indexLogin"; }
+    public String indexLoginPost(@ModelAttribute("client") Client client) { return "indexLogin"; }
 
     @GetMapping("/indexRegister")
     public String indexRegister() { return "indexRegister"; }

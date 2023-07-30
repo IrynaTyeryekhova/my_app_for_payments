@@ -1,11 +1,23 @@
 package org.example.entities;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class Client {
+    @NotEmpty(message = "Email should not be empty")
+    @Email(message = "Email should be valid")
     private String eMail;
+
+    @NotEmpty(message = "Password should not be empty")
+    @Size(min=6, max=15, message = "Password should be between 6 and 15 characters")
     private String password;
+
     private String name;
     private String status;
     private String role;
+
+    public Client() {}
 
     public Client(String eMail, String password, String name) {
         this.eMail = eMail;
