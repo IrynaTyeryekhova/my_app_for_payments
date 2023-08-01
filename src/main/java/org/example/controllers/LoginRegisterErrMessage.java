@@ -3,7 +3,6 @@ package org.example.controllers;
 import org.example.services.ErrorsMessage;
 import org.example.services.Service;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,12 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/infoLoginMessage")
+@RequestMapping("/loginRegisterErrMessage")
 
-public class InfoLoginMessage {
+public class LoginRegisterErrMessage {
 
         @GetMapping()
-        public String createInfoLoginMessage(Model model, HttpServletRequest request) {
+        public String createLoginRegisterErrMessage(HttpServletRequest request) {
             HttpSession session = request.getSession();
             String message = new Service().getParameter(session, request, "message");
             String infoMessage = "";
@@ -42,7 +41,7 @@ public class InfoLoginMessage {
         }
 
     @PostMapping()
-    public String createInfoLoginMessagePost(Model model, HttpServletRequest request) {
-            return createInfoLoginMessage(model, request);
+    public String createLoginRegisterErrMessagePost(HttpServletRequest request) {
+            return createLoginRegisterErrMessage(request);
     }
  }

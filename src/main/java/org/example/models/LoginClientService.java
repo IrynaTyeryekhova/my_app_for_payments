@@ -22,7 +22,7 @@ public class LoginClientService {
         String passwordLogin = clientLogin.getPassword();
         Client client = dbClientService.getClientInfo(eMailLogin);
 
-        if (client == null) return "redirect:/infoLoginMessage?&message=loginErr";
+        if (client == null) return "redirect:/loginRegisterErrMessage?&message=loginErr";
 //        return "redirect:/infoMessage?lang=" + language + "&message=error"
 
         if (client.getPassword().equals(passwordLogin) && client.getStatus().equals(Statuses.UNBLOCK_STRING)) {
@@ -37,16 +37,17 @@ public class LoginClientService {
 
                     if(client.getRole().equals(Roles.USER_STRING)) {
 //                        LOG.info("Login client. Client role: user");
-                        response = "redirect:/register";
+//                        response = "redirect:/register";
+                        response = "index";
                     } else {
                         session.setAttribute("ClientRole", Roles.ADMIN_STRING);
 //                        LOG.info("Login client. Client role: admin");
                         response = "adminCardsMenu";
                     }
                 } else if (!client.getPassword().equals(passwordLogin)) {
-                    response = "redirect:/infoLoginMessage?message=loginErr";
+                    response = "redirect:/loginRegisterErrMessage?message=loginErr";
                 } else if (client.getStatus().equals(Statuses.BLOCK_STRING)) {
-                    response = "redirect:/infoLoginMessage?message=loginBlockErr";
+                    response = "redirect:/loginRegisterErrMessage?message=loginBlockErr";
                 }
 
         return response;

@@ -13,7 +13,10 @@ public class Service {
         String param = req.getParameter(parameter);
         if(param==null && parameter.equals("lang")) { param = "ua";}
         if(param==null) { param = (String) session.getAttribute(parameter);}
-        if(param==null&&(parameter.equals("ClientName")||parameter.equals("action")||parameter.equals("admin"))) { param = "";}
+        if(param==null&&(parameter.equals("ClientName")||
+                parameter.equals("action")||
+                parameter.equals("admin")||
+                parameter.equals("adminPage"))) { param = "";}
         return param;
     }
 
