@@ -12,6 +12,7 @@
        <div class="login-main-text">
            <h2><p th:text="#{name.app}"></p>
                <p th:text="#{name.app.register}"></p>
+               <th:block th:utext="#{${session.infoMessage}}">infoMessage</th:block>
                _____________________________________________ <br>
            </h2>
 
