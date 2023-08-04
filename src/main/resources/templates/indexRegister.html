@@ -12,7 +12,6 @@
        <div class="login-main-text">
            <h2><p th:text="#{name.app}"></p>
                <p th:text="#{name.app.register}"></p>
-               <th:block th:utext="#{${session.infoMessage}}">infoMessage</th:block>
                _____________________________________________ <br>
            </h2>
 
@@ -27,26 +26,30 @@
    <div class="main">
          <div class="col-md-6 col-sm-12">
             <div class="login-form">
-               <form th:action="@{#{form.actionRegister}}"  target="_blanc" method="post">
+               <form th:action="@{#{form.actionRegister}}"  target="_blanc" th:method="post" th:object="${client}">
 
                   <div class="form-group">
-                      <label th:text="#{formName}"></label>
-                      <input type="text" class="form-control" th:placeholder="#{placeholderName}" name="ClientName">
+                      <label for="name" th:text="#{formName}"></label>
+                      <input type="text" class="form-control" th:placeholder="#{placeholderName}" th:field="*{name}" id="name">
+                      <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name errors</div>
                   </div>
 
                   <div class="form-group">
-                      <label th:text="#{formEMail}" ></label>
-                      <input type="email" class="form-control" required th:placeholder="#{placeholderEMail}" name="ClientEMail">
+                      <label for="eMail" th:text="#{formEMail}" ></label>
+                      <input type="email" class="form-control" required th:placeholder="#{placeholderEMail}" th:field="*{eMail}" id="eMail">
+                      <div style="color:red" th:if="${#fields.hasErrors('eMail')}" th:errors="*{eMail}">Name errors</div>
                   </div>
 
                   <div class="form-group">
-                      <label th:text="#{formPassword}" ></label>
-                      <input type="password" class="form-control" onchange="onChange()" required th:placeholder="#{placeholderPassword}" name="Password">
+                      <label for="password" th:text="#{formPassword}" ></label>
+                      <input type="password" class="form-control" onchange="onChange()" required th:placeholder="#{placeholderPassword}" th:field="*{password}" id="password">
+                      <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name errors</div>
                   </div>
 
                   <div class="form-group">
-                       <label th:text="#{formPasswordConfirm}" ></label>
-                       <input type="password" class="form-control"  onchange="onChange()" required th:placeholder="#{placeholderPasswordConfirm}" name="Confirm">
+                       <label for="confirmPassword" th:text="#{formConfirmPassword}" ></label>
+                       <input type="password" class="form-control"  onchange="onChange()" required th:placeholder="#{placeholderConfirmPassword}" th:field="*{confirmPassword}" id="confirmPassword">
+                       <div style="color:red" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">Name errors</div>
                   </div>
 
                   <p th:text="#{formRequiredFields}" ></p>

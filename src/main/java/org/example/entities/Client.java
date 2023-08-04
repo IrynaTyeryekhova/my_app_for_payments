@@ -1,9 +1,11 @@
 package org.example.entities;
 
+import org.example.services.FieldEquals;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+@FieldEquals( field="password", equalsTo="confirmPassword" )
 public class Client {
     @NotEmpty(message = "Email should not be empty")
     @Email(message = "Email should be valid")
@@ -13,9 +15,12 @@ public class Client {
     @Size(min=6, max=15, message = "Password should be between 6 and 15 characters")
     private String password;
 
+    @Size(min=6, max=15, message = "Password should be between 6 and 15 characters")
+    private String confirmPassword;
+
     private String name;
-    private String status;
-    private String role;
+    private int status;
+    private int role;
 
     public Client() {}
 
@@ -24,7 +29,7 @@ public class Client {
         this.password = password;
         this.name = name;
     }
-    public Client(String eMail, String password, String name, String role, String status) {
+    public Client(String eMail, String password, String name, int role, int status) {
         this.eMail = eMail;
         this.password = password;
         this.name = name;
@@ -61,20 +66,28 @@ public class Client {
         this.name = name;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public String getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(int role) {
         this.role = role;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }
 

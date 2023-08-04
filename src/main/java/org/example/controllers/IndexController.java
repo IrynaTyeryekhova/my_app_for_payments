@@ -23,9 +23,9 @@ public class IndexController {
     public String indexLoginPost(@ModelAttribute("client") Client client) { return "indexLogin"; }
 
     @GetMapping("/indexRegister")
-    public String indexRegister() { return "indexRegister"; }
+    public String indexRegister(@ModelAttribute("client") Client client) { return "indexRegister"; }
 
     @PostMapping("/indexRegister")
-    public String indexRegisterPost() { return "indexRegister"; }
+    public String indexRegisterPost(@ModelAttribute("client") Client client) { return "indexRegister"; }
 }
 

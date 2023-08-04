@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="${param.lang}" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Application for payments</title>
+    <link type="text/css" th:href="@{static/css/stylesheet.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
+</head>
+<body>
+   <div class="sidenav">
+       <div class="login-main-text">
+           <h2><p th:text="#{name.app}"></p>
+               <th:block th:utext="#{${infoMessageMenu}}">infoMessage</th:block>
+               _____________________________________________ <br>
+           </h2>
+
+           <p><fmt:message key="button.backToCardsMenu" /></p>
+
+           <form name="formLog" action=<fmt:message key="form.actionCardsMenu" />  method="post">
+               <button type="submit" class="btn btn-black"><fmt:message key="button.cards" /></button>
+           </form>
+           _____________________________________________ <br>
+           <p><fmt:message key="button.backToPayments" /></p>
+
+           <form name="formLog" action=<fmt:message key="form.actionPaymentsMenu" />  method="post">
+               <button type="submit" class="btn btn-black"><fmt:message key="button.payments" /></button>
+           </form>
+
+       </div>
+   </div>
+   <div class="main">
+       <form name="formLog" action=<fmt:message key="form.actionExit" />  method="post">
+           <button style = "margin-left: 85%; margin-top: 1%;"type="submit" class="btn btn-blacktwo"><fmt:message key="button.logOut" /></button>
+       </form>
+       <h3 style="font-family: Arial, sans-serif; width: 30%;text-align: center; margin-left: 10%; margin-top: 11%; position: fixed;  z-index: 1; font-weight: 100; padding: 60px"><fmt:message key="${infoMessage}" /><br>
+       </h3>
+   </div>
+</body>
+</html>
