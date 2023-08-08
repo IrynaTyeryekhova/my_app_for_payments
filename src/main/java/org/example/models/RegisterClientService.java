@@ -11,31 +11,22 @@ import javax.servlet.http.HttpSession;
 public class RegisterClientService {
 
         public String registerClientMake(HttpServletRequest request, DBClientService dbClientService, Client clientRegister) {
+            //        LOG.info("Client registration is starting");
             HttpSession session = request.getSession();
-//            String language = new Service().getParameter(session, request, "lang");
-//            String action = new Service().getParameter(session, request, "action");
-//
-//            if (action.equals("registration") ) {
 
-//                String eMail = new Service().getParameter(session, request, "ClientEMail");
-//                String password = new Service().getParameter(session, req, "Password");
-//                String name = new Service().getParameter(session, req, "ClientName");
+            int insertResult = dbClientService.insertClient(clientRegister);
 
-//                LOG.info("Client registration is starting");
-
-                int insertResult = dbClientService.insertClient(clientRegister);
-
-                if (insertResult == 0) return  "redirect:/loginRegisterErrMessage?message=registerDuplicate";
+            if (insertResult == 0) return "redirect:/loginRegisterErrMessage?message=registerDuplicate";
 //                else LOG.info("Client registration was successful");
 
-                session.setAttribute("ClientEMail", clientRegister.geteMail());
-                session.setAttribute("Password", clientRegister.getPassword());
-                session.setAttribute("ClientName", clientRegister.getName());
+            session.setAttribute("ClientEMail", clientRegister.geteMail());
+            session.setAttribute("Password", clientRegister.getPassword());
+            session.setAttribute("ClientName", clientRegister.getName());
 
-                String greeting = new Service().helloMake(clientRegister.getName());
-                session.setAttribute("hello", greeting);
-//            }
+            String greeting = new Service().helloMake(clientRegister.getName());
+            session.setAttribute("hello", greeting);
             session.setAttribute("ClientRole", Roles.USER_STRING);
+
 //            resp.sendRedirect("/register?lang=" + language);
 
             return "personalOffice";

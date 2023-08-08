@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="${param.lang}" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Application for payments</title>
+    <link type="text/css" th:href="@{static/css/stylesheet.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
+</head>
+<body>
+         <div class="sidenav">
+             <div class="login-main-text">
+                 <h2><p th:text="#{name.app}"></p>
+                     <p th:text="#{name.app.personalOffice}"></p>
+                     _____________________________________________
+                 </h2>
+                 <h2 name="hello"> <p th:text="#{name.app.hello} + ${session.hello}"></p>
+                     _____________________________________________
+                 </h2>
+                 <p th:text="#{name.app.personalOffice.description}" ></p>
+
+                 <form name="formLog" th:action="#{form.actionCardsMenu}" target="_blanc" th:method="post">
+                     <button type="submit" class="btn btn-black" th:text="#{text.cards}" > </button>
+                 </form>
+                 <br>
+                 <form name="formLog" th:action="#{form.actionPaymentsMenu}" target="_blanc" th:method="post">
+                     <button type="submit" class="btn btn-black" th:text="#{text.payments}" ></button>
+                 </form>
+
+                  _____________________________________________ <br>
+                 <p th:text="#{text.exit}" ></p>
+
+                 <form name="formLog" th:action="#{form.actionExit}"  th:method="post">
+                     <button type="submit" class="btn btn-black" th:text="#{button.logOut}" ></button>
+                 </form>
+
+                 _____________________________________________ <br>
+                 <p th:text="#{languageChangeText}" ></p>
+
+                 <form name="formLog" th:action="@{#{languageChangeLink}}"  th:method="post">
+                     <button type="submit" class="btn btn-black" th:text="#{languageChangeButton}" ></button>
+                 </form>
+             </div>
+         </div>
+</body>
+</html>
