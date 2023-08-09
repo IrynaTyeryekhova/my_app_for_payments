@@ -21,9 +21,9 @@ public class RegisterClientService {
 
             session.setAttribute("ClientEMail", clientRegister.geteMail());
             session.setAttribute("Password", clientRegister.getPassword());
-            session.setAttribute("ClientName", clientRegister.getName());
+            session.setAttribute("ClientName", clientRegister.getuserName());
 
-            String greeting = new Service().helloMake(clientRegister.getName());
+            String greeting = new Service().helloMake(clientRegister.getuserName());
             session.setAttribute("hello", greeting);
             session.setAttribute("ClientRole", Roles.USER_STRING);
 

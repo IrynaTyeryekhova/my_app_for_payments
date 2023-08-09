@@ -29,9 +29,9 @@
                <form th:action="@{#{form.actionRegister}}"  target="_blanc" th:method="post" th:object="${client}">
 
                   <div class="form-group">
-                      <label for="name" th:text="#{formName}"></label>
-                      <input type="text" class="form-control" th:placeholder="#{placeholderName}" th:field="*{name}" id="name">
-                      <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name errors</div>
+                      <label for="userName" th:text="#{formName}"></label>
+                      <input type="text" class="form-control" th:placeholder="#{placeholderName}" th:field="*{userName}" id="userName">
+                      <div style="color:red" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Name errors</div>
                   </div>
 
                   <div class="form-group">

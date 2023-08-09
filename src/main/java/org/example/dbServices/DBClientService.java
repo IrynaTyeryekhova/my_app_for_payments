@@ -34,7 +34,7 @@ public class DBClientService {
     public int insertClient(Client client) {
         int resultInsert = 0;
         try {
-            resultInsert = jdbcTemplate.update(DBQuery.INSERT_CLIENT, client.geteMail(), client.getPassword(), client.getName(), Roles.USER, Statuses.UNBLOCK);
+            resultInsert = jdbcTemplate.update(DBQuery.INSERT_CLIENT, client.geteMail(), client.getPassword(), client.getuserName(), Roles.USER, Statuses.UNBLOCK);
         } catch (DataAccessException ignored) {}
         return resultInsert;
     }

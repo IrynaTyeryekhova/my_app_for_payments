@@ -24,7 +24,7 @@ public class LoginClientService {
 
         if (client.getPassword().equals(passwordLogin) && client.getStatus()==Statuses.UNBLOCK) {
 
-            userName = client.getName();
+            userName = client.getuserName();
             String greeting = new Service().helloMake(userName);
 
             session.setAttribute("ClientEMail", eMailLogin);

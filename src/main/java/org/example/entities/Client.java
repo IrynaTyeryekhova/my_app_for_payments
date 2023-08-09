@@ -18,28 +18,28 @@ public class Client {
     @Size(min=6, max=15, message = "Password should be between 6 and 15 characters")
     private String confirmPassword;
 
-    private String name;
+    private String userName;
     private int status;
     private int role;
 
     public Client() {}
 
-    public Client(String eMail, String password, String name) {
+    public Client(String eMail, String password, String userName) {
         this.eMail = eMail;
         this.password = password;
-        this.name = name;
+        this.userName = userName;
     }
-    public Client(String eMail, String password, String name, int role, int status) {
+    public Client(String eMail, String password, String userName, int role, int status) {
         this.eMail = eMail;
         this.password = password;
-        this.name = name;
+        this.userName = userName;
         this.role = role;
         this.status = status;
 
     }
-    public Client(String eMail, String name) {
+    public Client(String eMail, String userName) {
         this.eMail = eMail;
-        this.name = name;
+        this.userName = userName;
     }
 
     public String geteMail() {
@@ -58,12 +58,12 @@ public class Client {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getuserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setuserName(String userName) {
+        this.userName = userName;
     }
 
     public int getStatus() {

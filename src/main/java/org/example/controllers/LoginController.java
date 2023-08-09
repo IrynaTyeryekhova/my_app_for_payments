@@ -3,13 +3,16 @@ package org.example.controllers;
 import org.example.dbServices.DBClientService;
 import org.example.entities.Client;
 import org.example.models.LoginClientService;
+import org.example.services.Service;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -28,5 +31,15 @@ public class LoginController {
         return response;
     }
 
-
+    @PostMapping()
+    public String loginPost(@ModelAttribute("client") @Valid Client client, BindingResult bindingResult, HttpServletRequest request){
+        if(bindingResult.hasErrors()) {
+            HttpSession session = request.getSession();
+            String action = new Service().getParameter(session, request, "action");
+            if(action.equals("login")) return "indexLogin";
+            else return "personalOffice";
+        }
+        String response = new LoginClientService().loginClientChecking(request, dbClientService, client);
+        return response;
+    }
 }
