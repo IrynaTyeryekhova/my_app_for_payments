@@ -33,11 +33,4 @@ public class RegisterController {
         String response = new RegisterClientService().registerClientMake(request, dbClientService, client);
         return response;
     }
-
-//    @GetMapping()
-//    public String registerGet(@ModelAttribute("client") @Valid Client client, BindingResult bindingResult, HttpServletRequest request){
-//        if(bindingResult.hasErrors()) return "index";
-//        String response = registerPost(client, bindingResult, request);
-//        return response;
-//    }
 }

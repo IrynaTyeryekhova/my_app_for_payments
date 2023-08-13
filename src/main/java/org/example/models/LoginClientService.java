@@ -13,7 +13,6 @@ public class LoginClientService {
     public String loginClientChecking(HttpServletRequest request, DBClientService dbClientService, Client clientLogin) {
 
         HttpSession session = request.getSession();
-        String action = new Service().getParameter(session, request, "action");
 
         String userName;
         String eMailLogin = clientLogin.geteMail();
@@ -32,26 +31,24 @@ public class LoginClientService {
             session.setAttribute("ClientName", userName);
             session.setAttribute("hello", greeting);
 
-                    if(client.getRole()==Roles.USER) {
+            if(client.getRole()==Roles.USER) {
 //                        LOG.info("Login client. Client role: user");
-                        session.setAttribute("ClientRole", Roles.USER_STRING);
+                session.setAttribute("ClientRole", Roles.USER_STRING);
 //            resp.sendRedirect("/register?lang=" + language);
 
-                        return "personalOffice";
+                return "personalOffice";
 //                        return  new RegisterClientService().registerClientMake(request, dbClientService, clientLogin);
 //                        "redirect:/register";
-                    } else {
-                        session.setAttribute("ClientRole", Roles.ADMIN_STRING);
+            } else {
+                session.setAttribute("ClientRole", Roles.ADMIN_STRING);
 //                        LOG.info("Login client. Client role: admin");
-                        return  "adminCardsMenu";
-                    }
-                } else if (!client.getPassword().equals(passwordLogin)) {
-                    return  "redirect:/loginRegisterErrMessage?message=loginErr";
-                } else if (client.getStatus()==Statuses.BLOCK) {
-                    return  "redirect:/loginRegisterErrMessage?message=loginBlockErr";
-                }
-
-        return "";
+                return  "adminCardsMenu";
+            }
+        } else if (!client.getPassword().equals(passwordLogin)) {
+            return  "redirect:/loginRegisterErrMessage?message=loginErr";
+        } else if (client.getStatus()==Statuses.BLOCK) {
+            return  "redirect:/loginRegisterErrMessage?message=loginBlockErr";
+        } else return "";
     }
 //    public HttpServletRequest loginDoGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        return req;

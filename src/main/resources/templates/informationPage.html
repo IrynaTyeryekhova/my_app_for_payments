@@ -14,25 +14,25 @@
                _____________________________________________ <br>
            </h2>
 
-           <p><fmt:message key="button.backToCardsMenu" /></p>
+           <p th:text="#{button.backToCardsMenu}" ></p>
 
-           <form name="formLog" action=<fmt:message key="form.actionCardsMenu" />  method="post">
-               <button type="submit" class="btn btn-black"><fmt:message key="button.cards" /></button>
+           <form name="formLog" th:action="#{form.actionCardsMenu}" target="_blanc" th:method="post">
+               <button type="submit" class="btn btn-black" th:text="#{text.cards}" > </button>
            </form>
            _____________________________________________ <br>
-           <p><fmt:message key="button.backToPayments" /></p>
+           <p th:text="#{button.backToPayments}" ></p>
 
-           <form name="formLog" action=<fmt:message key="form.actionPaymentsMenu" />  method="post">
-               <button type="submit" class="btn btn-black"><fmt:message key="button.payments" /></button>
+           <form name="formLog" th:action="#{form.actionPaymentsMenu}" target="_blanc" th:method="post">
+               <button type="submit" class="btn btn-black" th:text="#{text.payments}" ></button>
            </form>
 
        </div>
    </div>
    <div class="main">
-       <form name="formLog" action=<fmt:message key="form.actionExit" />  method="post">
-           <button style = "margin-left: 85%; margin-top: 1%;"type="submit" class="btn btn-blacktwo"><fmt:message key="button.logOut" /></button>
+       <form name="formLog" th:action="#{form.actionExit}"  th:method="post">
+           <button type="submit" class="btn btn-black" th:text="#{button.logOut}" ></button>
        </form>
-       <h3 style="font-family: Arial, sans-serif; width: 30%;text-align: center; margin-left: 10%; margin-top: 11%; position: fixed;  z-index: 1; font-weight: 100; padding: 60px"><fmt:message key="${infoMessage}" /><br>
+       <h3 style="font-family: Arial, sans-serif; width: 30%;text-align: center; margin-left: 10%; margin-top: 11%; position: fixed;  z-index: 1; font-weight: 100; padding: 60px" th:text="${session.infoMessage}" ></h3><br>
        </h3>
    </div>
 </body>

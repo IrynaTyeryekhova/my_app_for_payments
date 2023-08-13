@@ -27,16 +27,6 @@ public class RegisterClientService {
             session.setAttribute("hello", greeting);
             session.setAttribute("ClientRole", Roles.USER_STRING);
 
-//            resp.sendRedirect("/register?lang=" + language);
-
             return "personalOffice";
         }
-
-//        public HttpServletRequest registerDoGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//            HttpSession session = req.getSession();
-//            String language = new Service().getParameter(session, req, "lang");
-//
-//            req.getRequestDispatcher("personalOffice.jsp?lang=" + language).forward(req, resp);
-//            return req;
-//        }
 }

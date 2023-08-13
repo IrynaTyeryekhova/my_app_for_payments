@@ -5,4 +5,5 @@ public class DBQuery {
             "INNER JOIN roles INNER JOIN statuses ON clients.role=roles.id AND clients.status=statuses.id  " +
             "WHERE clients.eMail=?";
     public static final String INSERT_CLIENT = "INSERT INTO clients (eMail, password, userName, role, status) values (?, ?, ?, ?, ?);";
+    public static final String FIND_ALL_CARD_FOR_CLIENT = "SELECT * FROM cards WHERE cards.client_id=?";
 }
