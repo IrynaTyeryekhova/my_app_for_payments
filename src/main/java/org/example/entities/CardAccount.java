@@ -5,15 +5,15 @@ public class CardAccount {
     private double balance;
     private String validityPeriod;
     private String password;
-    private String status;
-    private String clientId;
+    private String statusCard;
+    private String client;
     private int id;
+    public CardAccount() {}
 
     public CardAccount(String number, double balance, String validilyPeriod) {
         this.number = number;
         this.balance = balance;
         this.validityPeriod = validilyPeriod;
-
     }
 
     public CardAccount(String number, double balance, String validilyPeriod, String password) {
@@ -23,47 +23,69 @@ public class CardAccount {
         this.password = password;
     }
 
-    public CardAccount(String number, double balance, String validilyPeriod, String password, String status, String clientId) {
+    public CardAccount(String number, double balance, String validilyPeriod, String password, String statusCard, String client) {
         this.number = number;
         this.balance = balance;
         this.validityPeriod = validilyPeriod;
         this.password = password;
-        this.status = status;
-        this.clientId = clientId;
-    }
-
-    public String getValidityPeriod() {
-        return validityPeriod;
-    }
-
-    public double getBalance() {
-        return balance;
+        this.statusCard = statusCard;
+        this.client = client;
     }
 
     public String getNumber() {
         return number;
     }
 
-    public String getPassword() {
-        return password;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public int getId() {
-        return id;
+    public double getBalance() {
+        return balance;
     }
-    public String getStatus() {
-        return status;
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public String getValidityPeriod() {
+        return validityPeriod;
+    }
+
+    public void setValidityPeriod(String validityPeriod) {
+        this.validityPeriod = validityPeriod;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
+    public String getStatusCard() {
+        return statusCard;
+    }
+
+    public void setStatusCard(String statusCard) {
+        this.statusCard = statusCard;
+    }
+
+    public String getClient() {
+        return client;
+    }
+
+    public void setClient(String client) {
+        this.client = client;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public void setId(int id) {
         this.id = id;
-    }
-    public void setStatus(String status) {
-        this.status = status;
     }
 }
 

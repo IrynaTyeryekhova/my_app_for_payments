@@ -6,6 +6,7 @@ import org.example.models.RegisterClientService;
 import org.example.services.Service;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,5 +33,10 @@ public class RegisterController {
         }
         String response = new RegisterClientService().registerClientMake(request, dbClientService, client);
         return response;
+    }
+
+    @GetMapping()
+    public String registerGet(){
+        return "personalOffice";
     }
 }

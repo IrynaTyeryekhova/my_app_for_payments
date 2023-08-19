@@ -16,31 +16,34 @@ public class CardMenuService {
     public String cardMenuMake(HttpServletRequest request, DBCardService dbCardService) {
 //            LOG.info("CardMenuService/cardMenuMake is starting");
             HttpSession session = request.getSession();
-            String parametrSort =  new Service().getParameter(session,request, "actualParamSortCardMenu");
+            String parameterSort =  new Service().getParameter(session,request, "actualParamSortCardMenu");
             String response;
 
-            if(parametrSort==null) {parametrSort = "balance";}
-            session.setAttribute("actualParamSortCardMenu", parametrSort);
+            if(parameterSort==null) {
+                System.out.println("null");
+                parameterSort = "balance";}
+        System.out.println(parameterSort);
+            session.setAttribute("actualParamSortCardMenu", parameterSort);
 
             List<String> paramSortList = Arrays.asList("balance", "number", "validity_period");
             session.setAttribute("paramSortListCardMenu", paramSortList);
 
             List<CardAccount> cardAccounts = dbCardService.findAllCardForClient((String) session.getAttribute("ClientEMail"));
             if (cardAccounts != null) {
-               cardAccounts = sortCard(cardAccounts, parametrSort);
+               cardAccounts = sortCard(cardAccounts, parameterSort);
                session.setAttribute("cardAccountsForCardMenu", cardAccounts);
                response = "cardsMenu";
             } else response = "redirect:/infoMessage?message=error";
 
             return response;
         }
-        private List<CardAccount> sortCard(List<CardAccount> cardAccounts, String parametrSort) {
-            if(parametrSort==null||parametrSort.equals("balance")) {
+        private List<CardAccount> sortCard(List<CardAccount> cardAccounts, String parameterSort) {
+            if(parameterSort==null||parameterSort.equals("balance")) {
                 cardAccounts= cardAccounts
                         .stream()
                         .sorted(Comparator.comparing(s->s.getBalance()))
                         .collect(Collectors.toList());}
-            else if(parametrSort.equals("number")) {
+            else if(parameterSort.equals("number")) {
                 cardAccounts= cardAccounts
                         .stream()
                         .sorted(Comparator.comparing(s->s.getNumber()))
