@@ -13,18 +13,18 @@
               <h2><p th:text="#{name.appErr}"></p><br> _____________________________________________ <br></h2>
               <th:block th:utext="#{${session.infoMessage}}">infoMessage</th:block>
 
-              <form name="formLog" th:action="@{#{login.page}}" target="_blanc" th:method="post">
+              <form th:action="@{#{login.page}}" target="_blanc" th:method="get">
                    <button type="submit" class="btn btn-black" th:text="#{text.login}"> </button>
               </form>
               <br>
-              <form name="formLog" th:action="@{#{register.page}}" target="_blanc" th:method="post">
+              <form th:action="@{#{register.page}}" target="_blanc" th:method="get">
                    <button type="submit" class="btn btn-black" th:text="#{text.register}"></button>
               </form>
 
               <br> _____________________________________________ <br>
               <p th:text="#{languageChangeText}" ></p>
 
-              <form name="formLog" th:action="#{languageChangeLink.infoLoginMessage}"   method="post">
+              <form th:action="#{languageChangeLink.infoLoginMessage}"   method="post">
                    <button type="submit" class="btn btn-black" th:text="#{languageChangeButton}"></button>
               </form>
 

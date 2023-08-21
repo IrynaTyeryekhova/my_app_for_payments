@@ -18,25 +18,25 @@
                  </h2>
                  <p th:text="#{name.app.personalOffice.description}" ></p>
 
-                 <form name="formLog" th:action="#{form.actionCardsMenu}" target="_blanc" th:method="post">
+                 <form th:action="#{form.actionCardsMenu}" target="_blanc" th:method="get">
                      <button type="submit" class="btn btn-black" th:text="#{text.cards}" > </button>
                  </form>
                  <br>
-                 <form name="formLog" th:action="#{form.actionPaymentsMenu}" target="_blanc" th:method="post">
+                 <form th:action="#{form.actionPaymentsMenu}" target="_blanc" th:method="get">
                      <button type="submit" class="btn btn-black" th:text="#{text.payments}" ></button>
                  </form>
 
                   _____________________________________________ <br>
                  <p th:text="#{text.exit}" ></p>
 
-                 <form name="formLog" th:action="#{form.actionExit}"  th:method="post">
+                 <form th:action="#{form.actionExit}"  th:method="get">
                      <button type="submit" class="btn btn-black" th:text="#{button.logOut}" ></button>
                  </form>
 
                  _____________________________________________ <br>
                  <p th:text="#{languageChangeText}" ></p>
 
-                 <form name="formLog" th:action="@{#{languageChangeLink}}"  th:method="post">
+                 <form th:action="@{#{languageChangeLink}}"  th:method="post">
                      <button type="submit" class="btn btn-black" th:text="#{languageChangeButton}" ></button>
                  </form>
              </div>

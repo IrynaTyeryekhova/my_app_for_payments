@@ -23,6 +23,11 @@ public class RegisterController {
         this.dbClientService = dbClientService;
     }
 
+//    @GetMapping()
+//    public String registerGet(){
+//        return "personalOffice";
+//    }
+
     @PostMapping()
     public String registerPost(@ModelAttribute("client") @Valid Client client, BindingResult bindingResult, HttpServletRequest request){
         if(bindingResult.hasErrors()) {
@@ -35,8 +40,4 @@ public class RegisterController {
         return response;
     }
 
-    @GetMapping()
-    public String registerGet(){
-        return "personalOffice";
-    }
 }

@@ -13,17 +13,17 @@
 
         <p th:text="#{name.app.action}"></p>
 
-        <form name="formLog" th:action="@{#{login.page}}" target="_blanc" th:method="get">
+        <form th:action="@{#{login.page}}" target="_blanc" th:method="get">
             <button type="submit" class="btn btn-black" th:text="#{text.login}"></button>
         </form>
         <br>
-        <form name="formLog" th:action="@{#{register.page}}" target="_blanc" th:method="get">
+        <form th:action="@{#{register.page}}" target="_blanc" th:method="get">
             <button type="submit" class="btn btn-black" th:text="#{text.register}"></button>
         </form>
         <br> _____________________________________________ <br>
         <p th:text="#{languageChangeText}" ></p>
 
-        <form name="formLog" th:action="@{#{languageChangeLink}}"  th:method="post">
+        <form th:action="@{#{languageChangeLink}}"  th:method="post">
             <button type="submit" class="btn btn-black" th:text="#{languageChangeButton}" ></button>
         </form>
     </div>

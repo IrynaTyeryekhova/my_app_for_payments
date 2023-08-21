@@ -17,7 +17,7 @@
 
            <p th:text="#{languageChangeText}" ></p>
 
-           <form name="formLog" th:action="@{#{languageChangeLink}}"  th:method="post">
+           <form th:action="@{#{languageChangeLink}}"  th:method="post">
                <button type="submit" class="btn btn-black" th:text="#{languageChangeButton}" ></button>
            </form>
 

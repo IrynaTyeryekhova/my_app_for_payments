@@ -2,7 +2,7 @@
 <html lang="${param.lang}" xmlns:th="http://thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title th:text="#{text.error}"></title>
+    <title th:text="#{text.cards}"></title>
     <link type="text/css" th:href="@{static/css/stylesheet.css}" rel="stylesheet">
     <link type="text/css" th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
 </head>
@@ -16,7 +16,7 @@
 
            <p th:text="#{name.app.action.sort}" >
 
-           <form style="font-size: xx-small; margin: 0 0 0 0" th:action="#{form.actionCardsMenu}" th:method="post">
+           <form style="font-size: xx-small; margin: 0 0 0 0" th:action="#{form.actionCardsMenu}" th:method="get">
                <select id="actualParamSortCardMenu" class="btn btn-black-option" name="actualParamSortCardMenu">
                    <option style="font-size: small; margin: 0 0 0 0" th:each="sort : ${session.paramSortListCardMenu}" th:selected="${sort == session.actualParamSortCardMenu}" th:value="${sort}" th:utext="#{${sort}}"></option>
                </select>
@@ -25,7 +25,7 @@
            </p>
 
            <span th:each="cardAccount : ${session.cardAccountsForCardMenu}">
-               <form th:action="#{form.actionCardsInfo}"  th:method="post">
+               <form th:action="#{form.actionCardsInfo}"  th:method="get">
                    <span th:text="#{card.info.number} + ${cardAccount.getNumber()}"></span>
                    <input type="hidden" name="cardNumber" th:value="${cardAccount.getNumber()}"/>
                    <button type="submit" class="btn btn-black" th:text="${cardAccount.getBalance()}"> </button>
@@ -53,7 +53,7 @@
            _____________________________________________ <br>
            <p th:text="#{languageChangeText}" ></p>
 
-           <form th:action="@{#{languageChangeLink}}"  th:method="post">
+           <form th:action="@{#{languageChangeLink}}"  th:method="get">
                <button type="submit" class="btn btn-black" th:text="#{languageChangeButton}" ></button>
            </form>
        </div>

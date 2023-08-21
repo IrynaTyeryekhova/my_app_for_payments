@@ -5,7 +5,7 @@
     <title th:text="#{text.login}"> </title>
     <link type="text/css" th:href="@{static/css/stylesheet.css}" rel="stylesheet">
     <link type="text/css" th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
-    <th:block th:utext="#{script.login}">script.login</th:block>
+    <th:block th:utext="#{script.login}">script login</th:block>
 </head>
 <body>
     <div class="sidenav">
@@ -17,7 +17,7 @@
 
             <p th:text="#{languageChangeText}" ></p>
 
-            <form name="formLog" th:action="@{#{languageChangeLink}}"  th:method="post">
+            <form th:action="@{#{languageChangeLink}}"  th:method="post">
                 <button type="submit" class="btn btn-black" th:text="#{languageChangeButton}" ></button>
             </form>
          </div>
