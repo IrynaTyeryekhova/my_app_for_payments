@@ -23,10 +23,10 @@ public class RegisterController {
         this.dbClientService = dbClientService;
     }
 
-//    @GetMapping()
-//    public String registerGet(){
-//        return "personalOffice";
-//    }
+    @GetMapping()
+    public String registerGet(){
+        return "personalOffice";
+    }
 
     @PostMapping()
     public String registerPost(@ModelAttribute("client") @Valid Client client, BindingResult bindingResult, HttpServletRequest request){

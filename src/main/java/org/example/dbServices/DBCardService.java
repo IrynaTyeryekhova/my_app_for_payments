@@ -2,6 +2,7 @@ package org.example.dbServices;
 
 import org.example.entities.CardAccount;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -17,33 +18,19 @@ public class DBCardService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-//    public int insertCard(CardAccount card, String email){
-//        Connection con = null;
-//        PreparedStatement stmt = null;
-//        int result = 0;
-//        final String queryMySQL = "INSERT INTO cards (number, balance, validity_period, password, status_id, client_id) values (?, ?, ?, ?, ?, ?)";
-//        try {
-//            con = DataSource.getConnection();
-//            stmt = con.prepareStatement(queryMySQL, Statement.RETURN_GENERATED_KEYS);
-//            stmt.setString(1, card.getNumber());
-//            stmt.setDouble(2, card.getBalance());
-//            stmt.setString(3, card.getValidityPeriod());
-//            stmt.setString(4, card.getPassword());
-//            stmt.setInt(5, Statuses.UNBLOCK);
-//            stmt.setString(6, email);
-//            int insertAmount = stmt.executeUpdate();
-//            if (insertAmount > 0) {
-//                result = 1;
-//            }
-//        } catch (SQLException e) {
-//            LOG.info("SQLException in insertCard method");
-//            return result;
-//        } finally {
-//            DBCloseService.close(stmt);
-//            DBCloseService.close(con);
-//        }
-//        return result;
-//    }
+    public int insertCard(CardAccount card, String email){
+        int resultInsert = 0;
+        try {
+            resultInsert = jdbcTemplate.update(DBQuery.INSERT_CARD,
+                                               card.getNumber(),
+                                               card.getBalance(),
+                                               card.getValidityPeriod(),
+                                               card.getPassword(),
+                                               Statuses.UNBLOCK,
+                                               email);
+        } catch (DataAccessException ignored) {}
+        return resultInsert;
+    }
 //
 //    public int updateCardStatus(String number, int status, String passwordCard) throws DBException {
 //        Connection con = null;

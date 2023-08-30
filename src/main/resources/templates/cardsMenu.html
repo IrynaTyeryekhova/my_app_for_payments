@@ -35,7 +35,7 @@
            _____________________________________________ <br>
            <p th:text="#{text.add.card}" > </p>
 
-           <form th:action="@{#{cardAdd.page}}" th:method="get">
+           <form th:action="@{#{cardAdd.page.new}}" th:method="get">
                <button type="submit" class="btn btn-black" th:text="#{button.add}" > </button>
            </form>
            _____________________________________________ <br>
@@ -53,7 +53,7 @@
            _____________________________________________ <br>
            <p th:text="#{languageChangeText}" ></p>
 
-           <form th:action="@{#{languageChangeLink}}"  th:method="get">
+           <form th:action="@{#{languageChangeLink}}"  th:method="post">
                <button type="submit" class="btn btn-black" th:text="#{languageChangeButton}" ></button>
            </form>
        </div>

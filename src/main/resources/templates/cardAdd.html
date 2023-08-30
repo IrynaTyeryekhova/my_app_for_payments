@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="${param.lang}" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="#{text.cards}"></title>
+    <link type="text/css" th:href="@{/static/css/stylesheet.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
+    <th:block th:utext="#{script.cardAdd}">script cardAdd</th:block>
+</head>
+<body>
+   <div class="sidenav">
+       <div class="login-main-text">
+           <h2><p th:text="#{name.app}"></p>
+               <p th:text="#{name.app.addingCard}" ></p>
+               _____________________________________________ <br>
+           </h2>
+
+           <p th:text="#{button.backToCardsMenu}" ></p>
+
+           <form th:action="#{form.actionCardsMenu}" th:method="get">
+               <button type="submit" class="btn btn-black" th:text="#{text.cards}" > </button>
+           </form>
+            _____________________________________________ <br>
+           <p th:text="#{text.exit}" ></p>
+
+           <form th:action="#{form.actionExit}"  th:method="get">
+               <button type="submit" class="btn btn-black" th:text="#{button.logOut}" ></button>
+           </form>
+           _____________________________________________ <br>
+           <p th:text="#{languageChangeText}" ></p>
+
+           <form th:action="@{#{languageChangeLink}}"  th:method="post">
+               <button type="submit" class="btn btn-black" th:text="#{languageChangeButton}" ></button>
+           </form>
+       </div>
+   </div>
+   <div class="main">
+
+         <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+               <form  th:action="#{form.actionCardAdd}" th:method="post" th:object="${cardAccount}">
+
+                  <div class="form-group">
+                      <label for="number" th:text="#{formCardNumber}" ></label>
+                      <input type="text" class="form-control" required th:placeholder="#{placeholderCardNumber}" th:field="*{number}" id="number" maxlength="16">
+                      <div style="color:red" th:if="${#fields.hasErrors('number')}" th:errors="*{number}">Number errors</div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="balance" th:text="#{formBalance}" ></label>
+                      <input type="text" class="form-control" required th:placeholder="#{placeholderNewBalance}" th:field="*{balance}" id="balance" minlength="1" maxlength="9">
+                      <div style="color:red" th:if="${#fields.hasErrors('balance')}" th:errors="*{balance}">Balance errors</div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="validityPeriod" th:text="#{formValidityPeriod}" ></label>
+                      <input type="text" class="form-control" required th:placeholder="#{placeholderValidityPeriod}" th:field="*{validityPeriod}" id="validityPeriod" maxlength="10" >
+                      <div style="color:red" th:if="${#fields.hasErrors('validityPeriod')}" th:errors="*{validityPeriod}">ValidityPeriod errors</div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="password" th:text="#{formPassword}" ></label>
+                      <input type="password" class="form-control"  required th:placeholder="#{placeholderPassword}" th:field="*{password}" id="password">
+                      <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password errors</div>
+                  </div>
+
+                  <div class="form-group">
+                       <label for="confirmPassword" th:text="#{formConfirmPassword}" ></label>
+                       <input type="password" class="form-control"  required th:placeholder="#{placeholderConfirmPassword}" th:field="*{confirmPassword}" id="confirmPassword">
+                       <div style="color:red" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">ConfirmPassword errors</div>
+                  </div>
+                  <p th:text="#{formRequiredFields}" ></p>
+
+                  <button type="submit" onclick="onChange()" class="btn btn-blacktwo" th:text="#{button.add}" ></button>
+
+               </form>
+            </div>
+         </div>
+   </div>
+</body>
+</html>

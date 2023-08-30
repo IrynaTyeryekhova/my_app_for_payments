@@ -10,7 +10,7 @@
    <div class="sidenav">
        <div class="login-main-text">
            <h2><p th:text="#{name.app}"></p>
-               <th:block th:utext="#{${infoMessageMenu}}">infoMessage</th:block>
+               <th:block th:utext="#{${session.infoMessageMenu}}">infoMessage</th:block>
                _____________________________________________ <br>
            </h2>
 
@@ -32,7 +32,7 @@
        <form th:action="#{form.actionExit}" th:method="get">
            <button type="submit" class="btn btn-black" th:text="#{button.logOut}" ></button>
        </form>
-       <h3 style="font-family: Arial, sans-serif; width: 30%;text-align: center; margin-left: 10%; margin-top: 11%; position: fixed;  z-index: 1; font-weight: 100; padding: 60px" th:text="${session.infoMessage}" ></h3><br>
+       <h3 style="font-family: Arial, sans-serif; width: 30%;text-align: center; margin-left: 10%; margin-top: 11%; position: fixed;  z-index: 1; font-weight: 100; padding: 60px" th:text="#{${session.infoMessage}}" ></h3><br>
        </h3>
    </div>
 </body>

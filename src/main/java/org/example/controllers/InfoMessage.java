@@ -16,7 +16,6 @@ public class InfoMessage {
         HttpSession session = request.getSession();
         String response;
 
-//        String message = req.getParameter("message");
         String message = new Service().getParameter(session, request, "message");
         String adminPage = new Service().getParameter(session, request, "adminPage");
 
@@ -26,6 +25,12 @@ public class InfoMessage {
         if(message.equals("error")){
             infoMessage = "message.error";
             infoMessageMenu = "message.menu.error";
+        } else if (message.equals("insertCardErr")) {
+            infoMessage = "message.insertCardErr";
+            infoMessageMenu = "message.menu.addingCard";
+        } else if (message.equals("card")) {
+            infoMessage = "message.card";
+            infoMessageMenu = "message.menu.addingCard";
         }
         session.setAttribute("infoMessage", infoMessage);
         session.setAttribute("infoMessageMenu", infoMessageMenu);
