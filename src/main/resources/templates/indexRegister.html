@@ -17,7 +17,7 @@
 
            <p th:text="#{languageChangeText}" ></p>
 
-           <form th:action="@{#{languageChangeLink}}"  th:method="post">
+           <form th:action="#{languageChangeLink}"  th:method="post">
                <button type="submit" class="btn btn-black" th:text="#{languageChangeButton}" ></button>
            </form>
 
@@ -26,7 +26,7 @@
    <div class="main">
          <div class="col-md-6 col-sm-12">
             <div class="login-form">
-               <form th:action="@{#{form.actionRegister}}"  target="_blanc" th:method="post" th:object="${client}">
+               <form th:action="#{form.actionRegister}"  target="_blanc" th:method="post" th:object="${client}">
 
                   <div class="form-group">
                       <label for="userName" th:text="#{formName}"></label>

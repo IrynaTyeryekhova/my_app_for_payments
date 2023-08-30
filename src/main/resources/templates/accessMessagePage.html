@@ -13,11 +13,11 @@
               <h2><p th:text="#{name.appErr}"></p><br> _____________________________________________ <br></h2>
               <th:block th:utext="#{${session.infoMessage}}">infoMessage</th:block>
 
-              <form th:action="@{#{login.page}}" target="_blanc" th:method="get">
+              <form th:action="#{login.page}" target="_blanc" th:method="get">
                    <button type="submit" class="btn btn-black" th:text="#{text.login}"> </button>
               </form>
               <br>
-              <form th:action="@{#{register.page}}" target="_blanc" th:method="get">
+              <form th:action="#{register.page}" target="_blanc" th:method="get">
                    <button type="submit" class="btn btn-black" th:text="#{text.register}"></button>
               </form>
 
