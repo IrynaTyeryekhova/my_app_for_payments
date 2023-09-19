@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -40,7 +39,6 @@ public class CardAddController {
 //            if(action.equals("languageChange")) return "redirect:/cardAdd/languageChange";
            return "cardAdd";
         }
-        String response = new CardAddService().cardAdd(request, dbCardService, cardAccount);
-        return response;
+        return new CardAddService().cardAdd(request, dbCardService, cardAccount);
     }
 }

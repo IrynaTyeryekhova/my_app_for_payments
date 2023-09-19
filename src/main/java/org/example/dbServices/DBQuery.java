@@ -6,5 +6,8 @@ public class DBQuery {
             "WHERE clients.eMail=?";
     public static final String INSERT_CLIENT = "INSERT INTO clients (eMail, password, userName, role, status) values (?, ?, ?, ?, ?);";
     public static final String FIND_ALL_CARD_FOR_CLIENT = "SELECT * FROM cards WHERE cards.client=?";
+    public static final String GET_CARD_INFO = "SELECT * FROM cards INNER JOIN statuses ON cards.statusCard = statuses.id WHERE cards.number=?";
     public static final String INSERT_CARD = "INSERT INTO cards (number, balance, validityPeriod, password, statusCard, client) values (?, ?, ?, ?, ?, ?)";
+    public static final String GET_COUNT_ALL_PAYMENTS_FOR_CARD = "SELECT count(*) AS count FROM payments WHERE cardNumber=?";
+    public static final String FIND_ALL_PAYMENTS_FOR_CARD_WITH_LIMIT = "SELECT * FROM payments INNER JOIN statuses ON payments.status = statuses.id WHERE cardNumber=? ORDER BY ? " + " " + "?" + " " + " limit ? offset ?";
 }

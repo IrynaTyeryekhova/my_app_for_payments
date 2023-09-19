@@ -9,6 +9,7 @@ public class Payment {
     private String cardNumber;
     private String status;
 
+    public Payment() {}
 
     public Payment(double sum, String date) {
         this.sum = sum;

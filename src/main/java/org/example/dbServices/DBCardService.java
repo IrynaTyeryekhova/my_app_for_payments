@@ -1,6 +1,7 @@
 package org.example.dbServices;
 
 import org.example.entities.CardAccount;
+import org.example.entities.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -63,23 +64,6 @@ public class DBCardService {
 //
     public List<CardAccount> findAllCardForClient(String email) {
         return jdbcTemplate.query(DBQuery.FIND_ALL_CARD_FOR_CLIENT, new Object[]{email}, new BeanPropertyRowMapper<>(CardAccount.class));
-//        List<CardAccount> cards = new ArrayList<>();
-//        CardAccount card = null;
-//        String query = "SELECT * FROM cards WHERE cards.client_id=?";
-//        try (Connection con = DataSource.getConnection();
-//             PreparedStatement stmt = con.prepareStatement(query);) {
-//            stmt.setString(1, email);
-//            try (ResultSet rs = stmt.executeQuery()) {
-//                while (rs.next()) {
-//                    card = new CardAccount(rs.getString(Fields.CARD_NUMBER), rs.getDouble(Fields.CARD_BALANCE), rs.getString(Fields.CARD_VALIDITY_PERIOD));
-//                    cards.add(card);
-//                }
-//            }
-//        } catch (SQLException e) {
-//            LOG.info("SQLException in findAllCardForClient method");
-//            return null;
-//        }
-//        return cards;
     }
 //
 //    public List<CardAccount> findAllCardClientForStatus(String email, int status) throws DBException {
@@ -187,23 +171,10 @@ public class DBCardService {
 //        return cards;
 //    }
 //
-//    public CardAccount getCardInfo(String number) throws DBException {
-//        CardAccount account = null;
-//        String query = "SELECT * FROM cards INNER JOIN statuses ON cards.status_id = statuses.id WHERE cards.number=?";
-//        try (Connection con = DataSource.getConnection();
-//             PreparedStatement stmt = con.prepareStatement(query);) {
-//            stmt.setString(1, number);
-//            try (ResultSet rs = stmt.executeQuery()) {
-//                while (rs.next()) {
-//                    account = new CardAccount(number, rs.getDouble(Fields.CARD_BALANCE), rs.getString(Fields.CARD_VALIDITY_PERIOD), rs.getString(Fields.PASSWORD), rs.getString(Fields.STATUS_NAME), rs.getString(Fields.CLIENT_ID));
-//                }
-//            }
-//        } catch (SQLException e) {
-//            LOG.info("SQLException in getCardInfo method");
-//            return account;
-//        }
-//        return account;
-//    }
+    public CardAccount getCardInfo(String number) {
+        return jdbcTemplate.query(DBQuery.GET_CARD_INFO, new Object[]{number}, new BeanPropertyRowMapper<>(CardAccount.class))
+                .stream().findAny().orElse(null);
+    }
 //
 //    public int getRequestAdmin(String number, int status) {
 //        int count = 0;

@@ -1,11 +1,8 @@
 package org.example.entities;
 
 import org.example.services.FieldEquals;
-import org.springframework.beans.factory.annotation.Value;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @FieldEquals( field="password", equalsTo="confirmPassword" )

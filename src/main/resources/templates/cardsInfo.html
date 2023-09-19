@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="${param.lang}" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="#{text.cardInfo}"></title>
+    <link type="text/css" th:href="@{/static/css/stylesheet.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
+</head>
+  <body>
+   <div class="sidenav">
+       <div class="login-main-text">
+           <h2><p th:text="#{name.app}"></p>
+               <p th:text="#{name.app.cardTransactions}" ></p>
+               _____________________________________________ <br>
+           </h2>
+
+           <p th:text="#{name.app.action.sort}" >
+               <form style="font-size: xx-small; margin: 0 0 0 0" th:action="#{form.actionCardsInfo}" th:method="get">
+
+               <select id="selectParamSortPaymentsForCard" class="btn btn-black-option" name="selectParamSortPaymentsForCard">
+                   <option style="font-size: small; margin: 0 0 0 0" th:each="sort : ${session.listParamSortPaymentsForCard}" th:selected="${sort == session.selectParamSortPaymentsForCard}" th:value="${sort}" th:utext="#{${sort}}"></option>
+               </select>
+
+               <select id="selectParamSortType" class="btn btn-black-option" name="selectParamSortType">
+                   <option style="font-size: small; margin: 0 0 0 0" th:each="sort : ${session.listParamSortType}" th:selected="${sort == session.selectParamSortType}" th:value="${sort}" th:utext="#{${sort}}" ></option>
+               </select>
+
+               <button type="submit" class="btn btn-black-option" th:text="#{button.apply}" ></button>
+               </form>
+           </p>
+
+           <p th:text="#{name.app.action.showBy}" >
+               <form style="font-size: xx-small; margin: 0 0 0 0" th:action="#{form.actionCardsInfo}" th:method="get">
+                   <select id="selectCountShow" class="btn btn-black-option" name="selectCountShow">
+                       <option style="font-size: small; margin: 0 0 0 0" th:each="sort : ${session.listCountShow}" th:selected="${sort == session.selectCountShow}" th:value="${sort}" th:utext="${sort}" ></option>
+                   </select>
+                   <button type="submit" class="btn btn-black-option" th:text="#{button.apply}" ></button>
+               </form>
+           </p>
+           _____________________________________________ <br>
+           <p th:text="#{button.balanceChange}" ></p>
+
+           <form th:action="#{form.actionCardBalanceChangeInfo}" th:method="get">
+               <button type="submit" class="btn btn-black" th:text="#{button.change}" ></button>
+           </form>
+
+           _____________________________________________ <br>
+           <p th:text="#{button.statusChange}" ></p>
+
+           <form th:action="#{form.actionCardStatusChangeInfo}" th:method="get">
+               <button type="submit" class="btn btn-black" th:text="#{button.change}" ></button>
+           </form>
+
+           _____________________________________________ <br>
+           <p th:text="#{button.backToCardsMenu}" ></p>
+
+           <form th:action="#{form.actionCardsMenu}" th:method="get">
+               <button type="submit" class="btn btn-black" th:text="#{text.cards}" > </button>
+           </form>
+
+           _____________________________________________ <br>
+           <p th:text="#{languageChangeText}" ></p>
+
+           <form th:action="#{languageChangeLink}"  th:method="post">
+               <button type="submit" class="btn btn-black" th:text="#{languageChangeButton}" ></button>
+           </form>
+       </div>
+   </div>
+   <div class="main">
+       <form th:action="#{form.actionExit}" th:method="post">
+           <button style = "margin-left: 85%; margin-top: 1%;"type="submit" class="btn btn-blacktwo" th:text="#{button.logOut}" ></button>
+       </form>
+
+       <form style="padding: 0px 0px 0px 0px; margin: 1% 0 0 17%; position: fixed;  z-index: 1; font-weight: 900px; padding: 6px" th:method="get">
+           <p th:text="#{card.info.number} + ${session.cardInfo.getNumber()}"></p>
+           <p th:text="#{card.info.validityPeriod} + ${session.cardInfo.getValidityPeriod()}"></p>
+           <p th:text="#{card.info.balance} + ${session.cardInfo.getBalance()}"></p>
+           <p th:text="#{card.info.status} + #{${session.cardInfo.getStatusCard()}}"></p>
+       </form>
+
+       <form th:action="#{form.actionCardsInfo}" th:method="get">
+           <button style = "padding: 0px 0px 0px 0px; margin: 11% 0 0 17%; position: fixed;  z-index: 1; font-weight: 100; padding: 6px" type="submit" class="btn btn-blacktwo" name = "previousPage" th:value = "1" th:text="#{button.back}" ></button>
+           <button style = "background-color: #000 !important; color: #FFF; width: 30px; padding: 0px 0px 0px 0px; margin: 11% 0 0 24.55%; position: fixed;  z-index: 1; font-weight: 100; padding: 5px" th:text="${session.numberPage}"></button>
+           <button style = " padding: 0px 0px 0px 0px; margin: 11% 0 0 27%;position: fixed;  z-index: 1; font-weight: 100; padding: 6px" type="submit" class="btn btn-blacktwo" name = "nextPage" th:value = "1" th:text="#{button.next}" ></button>
+       </form>
+
+       <table class= "tablePayments" style="font-family: Arial, sans-serif; width: 30%;text-align: center; margin-left: 10%; margin-top: 15%; position: fixed;  z-index: 1; font-weight: 100; padding: 60px" border = "3">
+           <tr>
+               <th th:text="#{payment.info.number}" > </th>
+               <th th:text="#{payment.info.date}" > </th>
+               <th th:text="#{payment.info.sum}" > </th>
+               <th th:text="#{payment.info.status}" > </th>
+               <th th:text="#{payment.info.purpose}" > </th>
+           </tr>
+
+           <tr th:each="sort : ${session.paymentsForCard}">
+                   <td th:text="${sort.getId()}"> </td>
+                   <td th:text="${sort.getDate()}"> </td>
+                   <td th:text="${sort.getSum()}"> </td>
+                   <td th:text="#{${sort.getStatus()}}"> </td>
+                   <td th:text="${sort.getPurposePayment()}"> </td>
+               </tr>
+       </table>
+   </div>
+  </body>
+</html>
