@@ -94,7 +94,7 @@
            </tr>
 
            <tr th:each="sort : ${session.paymentsForCard}">
-                   <td th:text="${sort.getId()}"> </td>
+                   <td th:text="${sort.getPaymentNumber()}"> </td>
                    <td th:text="${sort.getDate()}"> </td>
                    <td th:text="${sort.getSum()}"> </td>
                    <td th:text="#{${sort.getStatus()}}"> </td>

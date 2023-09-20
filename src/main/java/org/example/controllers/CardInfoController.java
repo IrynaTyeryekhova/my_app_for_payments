@@ -5,6 +5,7 @@ import org.example.dbServices.DBPaymentService;
 import org.example.models.CardInfoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.ServletException;
@@ -24,7 +25,11 @@ public class CardInfoController {
 
     @GetMapping
     public String cardInfoGet (HttpServletRequest request) throws ServletException, IOException {
-        String responce = new CardInfoService().cardInfoMake(request, dbCardService, dbPaymentService);
-        return responce;
+        return new CardInfoService().cardInfoMake(request, dbCardService, dbPaymentService);
+    }
+
+    @PostMapping
+    public String cardInfoPost (HttpServletRequest request) throws ServletException, IOException {
+        return new CardInfoService().cardInfoMake(request, dbCardService, dbPaymentService);
     }
 }

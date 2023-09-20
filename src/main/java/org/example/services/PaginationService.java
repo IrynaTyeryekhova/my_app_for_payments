@@ -46,7 +46,7 @@ public class PaginationService {
 
         if(nextPage != null && Integer.valueOf(nextPage)==1 && ((numberPage)*limit < paymentCount)) {++numberPage;}
         if(previousPage != null && Integer.valueOf(previousPage)==1 && numberPage-1 > 0) {--numberPage;}
-        System.out.println(limit);
+
         session.setAttribute("numberPage", numberPage);
         session.setAttribute("selectCountShow", String.valueOf(limit));
         session.setAttribute("listCountShow", Arrays.asList("2", "3", "5"));

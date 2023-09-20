@@ -28,24 +28,17 @@ public class CardInfoService {
 
             if(cardAccount == null || countAllPayments == -1) return ("redirect:/infoMessage?message=error");
             else {
-//                String response = paymentForCardMake(countAllPayments, request);
                 paymentForCardMake(request, dbPaymentService, countAllPayments);
 
-//                session.setAttribute("cardInfoCardNumber",cardNumber);
-//                session.setAttribute("cardInfoValidityPeriod",cardAccount.getValidityPeriod());
-//                session.setAttribute("cardInfoBalance",cardAccount.getBalance());
-//                session.setAttribute("cardInfoStatus",cardAccount.getStatusCard());
                 session.setAttribute("cardInfo", cardAccount);
             }
             return "cardsInfo";
         }
-        private String paymentForCardMake(HttpServletRequest request, DBPaymentService dbPaymentService, int countAllPayments) throws ServletException, IOException {
+        private String paymentForCardMake(HttpServletRequest request, DBPaymentService dbPaymentService, int countAllPayments) {
             HttpSession session = request.getSession();
-//            Service service = new Service();
-//            String language = service.getParameter(session, req, "lang");
+
             PaginationService paginationService = new PaginationService();
-            paginationService.parametersSortMake(request, "listParamSortPaymentsForCard","selectParamSortPaymentsForCard", "id", "date", "sum");
-//            "paramSortPaymentsForCardList"
+            paginationService.parametersSortMake(request, "listParamSortPaymentsForCard","selectParamSortPaymentsForCard", "paymentNumber", "date", "sum");
             paginationService.paginationMake(request, countAllPayments);
 
             Integer limit = Integer.valueOf(String.valueOf(session.getAttribute("selectCountShow")));

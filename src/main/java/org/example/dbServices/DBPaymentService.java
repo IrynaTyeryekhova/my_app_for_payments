@@ -99,9 +99,9 @@ public class DBPaymentService {
 //        return paymentCount;
     }
     public List<Payment> findAllPaymentsForCardWithLimit(String cardNumber, String orderBy, String typeSort, int limit, int offset) {
-        List<Payment> payments = new ArrayList<>();
+        List<Payment> payments;
         try {
-            payments = jdbcTemplate.query("SELECT * FROM payments INNER JOIN statuses ON payments.status = statuses.id WHERE cardNumber=? ORDER BY " + orderBy + " " + typeSort + " limit ? offset ?" , new Object[]{cardNumber, limit, offset}, new BeanPropertyRowMapper<>(Payment.class));
+            payments = jdbcTemplate.query("SELECT * FROM payments INNER JOIN statuses ON payments.status = statuses.id WHERE cardNumber=? ORDER BY " + orderBy + " " + typeSort + " limit ? offset ?", new Object[]{cardNumber, limit, offset}, new BeanPropertyRowMapper<>(Payment.class));
         } catch (DataAccessException ignored) {
             return null;
         }

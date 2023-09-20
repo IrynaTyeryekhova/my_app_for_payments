@@ -1,7 +1,7 @@
 package org.example.entities;
 
 public class Payment {
-    private int id;
+    private int paymentNumber;
     private double sum;
     private String date;
     private String purposePayment;
@@ -30,12 +30,12 @@ public class Payment {
         this.status = status;
     }
 
-    public int getId() {
-        return id;
+    public int getPaymentNumber() {
+        return paymentNumber;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPaymentNumber(int paymentNumber) {
+        this.paymentNumber = paymentNumber;
     }
 
     public double getSum() {
