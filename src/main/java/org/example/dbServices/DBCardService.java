@@ -246,33 +246,10 @@ public class DBCardService {
 //        return result;
 //    }
 //
-//    public int cardBalanceChange(String cardNumber, double newBalance, String passwordCard, boolean passwordСheck) throws DBException {
-//        Connection con = null;
-//        PreparedStatement stmt = null;
-//
-//        int result = 0;
-//        if (passwordСheck == false || equalsCardPassword(cardNumber, passwordCard)) {
-//            String query = "UPDATE cards c SET c.balance=? WHERE c.number=?";
-//            try {
-//                con = DataSource.getConnection();
-//                stmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-//                new DBCloseService().setAutocommit(con, false);
-//
-//                stmt.setDouble(1, newBalance);
-//                stmt.setString(2, cardNumber);
-//                if (stmt.executeUpdate() > 0) result = 1;
-//
-//            } catch (SQLException e) {
-//                LOG.info("SQLException in cardBalanceChange method");
-//                new DBCloseService().rollBack(con);
-//            } finally {
-//                new DBCloseService().setAutocommit(con, true);
-//                new DBCloseService().close(stmt);
-//                new DBCloseService().close(con);
-//            }
-//        } else result = 2;
-//        return result;
-//    }
+    public int cardBalanceChange(String cardNumber, double newBalance) {
+        int result = jdbcTemplate.update(DBQuery.CARD_BALANCE_CHANGE, newBalance, cardNumber);
+        return result;
+    }
 //
 //    public boolean equalsCardPassword(String number, String password) {
 //        boolean result = false;

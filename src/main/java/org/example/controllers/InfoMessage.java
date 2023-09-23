@@ -31,7 +31,16 @@ public class InfoMessage {
         } else if (message.equals("card")) {
             infoMessage = "message.card";
             infoMessageMenu = "message.menu.addingCard";
-        }
+        } else if (message.equals("balance")) {
+            infoMessage = "message.balanceChangedSuccessfully";
+            infoMessageMenu = "message.menu.balance";
+        } else if (message.equals("cardBalanceChangeErr")) {
+            infoMessage = "message.cardBalanceChangeErr";
+            infoMessageMenu = "message.menu.balance";
+        } else if (message.equals("cardBalanceChangeErrPassword")) {
+        infoMessage = "message.cardBalanceChangeErrPassword";
+        infoMessageMenu = "message.menu.balance";
+    }
         session.setAttribute("infoMessage", infoMessage);
         session.setAttribute("infoMessageMenu", infoMessageMenu);
 
