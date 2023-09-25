@@ -38,9 +38,31 @@ public class InfoMessage {
             infoMessage = "message.cardBalanceChangeErr";
             infoMessageMenu = "message.menu.balance";
         } else if (message.equals("cardBalanceChangeErrPassword")) {
-        infoMessage = "message.cardBalanceChangeErrPassword";
-        infoMessageMenu = "message.menu.balance";
-    }
+            infoMessage = "message.cardBalanceChangeErrPassword";
+            infoMessageMenu = "message.menu.balance";
+        } else if (message.equals("status")) {
+            infoMessage = "message.status";
+            infoMessageMenu = "message.menu.cardStatus";
+        } else if (message.equals("sendRequestAdmin")) {
+            infoMessage = "message.sendRequestAdmin";
+            infoMessageMenu = "message.menu.cardStatus";
+        } else if (message.equals("updateCardStatusErr")) {
+            infoMessage = "message.updateCardStatusErr";
+            infoMessageMenu = "message.menu.cardStatus";
+        } else if (message.equals("updateCardStatusErrPassword")) {
+            infoMessage = "message.updateCardStatusErrPassword";
+            infoMessageMenu = "message.menu.cardStatus";
+        } else if (message.equals("sendRequestAdminErr")) {
+            infoMessage = "message.sendRequestAdminErr";
+            infoMessageMenu = "message.menu.cardStatus";
+        } else if (message.equals("sendRequestAdminErrPassword")) {
+            infoMessage = "message.sendRequestAdminErrPassword";
+            infoMessageMenu = "message.menu.cardStatus";
+        } else if (message.equals("duplicateSendRequestAdminErr")) {
+            infoMessage = "message.duplicateSendRequestAdminErr";
+            infoMessageMenu = "message.menu.cardStatus";
+        }
+
         session.setAttribute("infoMessage", infoMessage);
         session.setAttribute("infoMessageMenu", infoMessageMenu);
 

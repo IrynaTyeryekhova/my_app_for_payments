@@ -9,6 +9,9 @@ public class DBQuery {
     public static final String GET_CARD_INFO = "SELECT * FROM cards INNER JOIN statuses ON cards.statusCard = statuses.id WHERE cards.number=?";
     public static final String INSERT_CARD = "INSERT INTO cards (number, balance, validityPeriod, password, statusCard, client) values (?, ?, ?, ?, ?, ?)";
     public static final String CARD_BALANCE_CHANGE = "UPDATE cards c SET c.balance=? WHERE c.number=?";
+    public static final String CARD_STATUS_CHANGE = "UPDATE cards c SET c.statusCard=? WHERE c.number=?";
+    public static final String GET_REQUEST_ADMIN = "SELECT * FROM request_admin WHERE card=? AND statusAdmin=?";
+    public static final String INSERT_REQUEST_ADMIN = "INSERT INTO request_admin (card, cardStatus, statusAdmin) values (?, ?, ?)";
     public static final String GET_COUNT_ALL_PAYMENTS_FOR_CARD = "SELECT count(*) AS count FROM payments WHERE cardNumber=?";
     public static final String FIND_ALL_PAYMENTS_FOR_CARD_WITH_LIMIT = "SELECT * FROM payments INNER JOIN statuses ON payments.status = statuses.id WHERE cardNumber=? ORDER BY ? " + " " + "?" + " " + " limit ? offset ?";
 }

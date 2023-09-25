@@ -7,7 +7,6 @@ import org.example.services.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-
 public class CardBalanceService {
 //    public static final Logger LOG=Logger.getLogger(CardBalanceService.class.getName());
 

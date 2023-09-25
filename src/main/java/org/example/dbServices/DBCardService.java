@@ -2,6 +2,7 @@ package org.example.dbServices;
 
 import org.example.entities.CardAccount;
 import org.example.entities.Client;
+import org.springframework.beans.NullValueInNestedPathException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -32,36 +33,21 @@ public class DBCardService {
         } catch (DataAccessException ignored) {}
         return resultInsert;
     }
-//
-//    public int updateCardStatus(String number, int status, String passwordCard) throws DBException {
-//        Connection con = null;
-//        PreparedStatement stmt = null;
-//        int result = 0;
-//        if (passwordCard.equals("false") || equalsCardPassword(number, passwordCard)) {
-//            final String queryMySQL = "UPDATE cards SET cards.status_id=? WHERE cards.number=?";
-//            try {
-//                con = DataSource.getConnection();
-//                stmt = con.prepareStatement(queryMySQL, Statement.RETURN_GENERATED_KEYS);
-//                stmt.setInt(1, status);
-//                stmt.setString(2, number);
-//                int insertAmount = stmt.executeUpdate();
-//                if (insertAmount > 0) {
-//                    result = 1;
-//                }
-//            } catch (SQLException e) {
-//                LOG.info("SQLException in updateCardStatus method");
-//                return result;
-//            } finally {
-//                DBCloseService.close(stmt);
-//                DBCloseService.close(con);
-//            }
-//        } else {
-//            LOG.info("Card password not equals in updateCardStatus method");
-//            result = 2;
-//        }
-//        return result;
-//    }
-//
+
+    public int cardBalanceChange(String cardNumber, double newBalance) {
+        int result = 0;
+        try {result = jdbcTemplate.update(DBQuery.CARD_BALANCE_CHANGE, newBalance, cardNumber);}
+        catch (DataAccessException ignored) {}
+        return result;
+    }
+
+    public int cardStatusChange(String number, int status) {
+        int result = 0;
+        try {result = jdbcTemplate.update(DBQuery.CARD_STATUS_CHANGE, status, number);}
+        catch (DataAccessException ignored) { }
+        return result;
+    }
+
     public List<CardAccount> findAllCardForClient(String email) {
         return jdbcTemplate.query(DBQuery.FIND_ALL_CARD_FOR_CLIENT, new Object[]{email}, new BeanPropertyRowMapper<>(CardAccount.class));
     }
@@ -175,52 +161,20 @@ public class DBCardService {
         return jdbcTemplate.query(DBQuery.GET_CARD_INFO, new Object[]{number}, new BeanPropertyRowMapper<>(CardAccount.class))
                 .stream().findAny().orElse(null);
     }
-//
-//    public int getRequestAdmin(String number, int status) {
-//        int count = 0;
-//        String query = "SELECT * FROM request_admin WHERE card_number=? AND status_admin=?";
-//        try (Connection con = DataSource.getConnection();
-//             PreparedStatement stmt = con.prepareStatement(query);) {
-//            stmt.setString(1, number);
-//            stmt.setInt(2, status);
-//            try (ResultSet rs = stmt.executeQuery()) {
-//                while (rs.next()) {
-//                    count = 1;
-//                }
-//            }
-//        } catch (SQLException e) {
-//            LOG.info("SQLException in getRequestAdmin method");
-//            return -1;
-//        }
-//        return count;
-//    }
-//
-//    public int insertRequestAdmin(String number, int status, String passwordCard) throws DBException {
-//        Connection con = null;
-//        PreparedStatement stmt = null;
-//        int result = 0;
-//        if (passwordCard.equals("false") || equalsCardPassword(number, passwordCard)) {
-//            final String queryMySQL = "INSERT INTO request_admin (card_number, status_id, status_admin) values (?, ?, ?)";
-//            try {
-//                con = DataSource.getConnection();
-//                stmt = con.prepareStatement(queryMySQL, Statement.RETURN_GENERATED_KEYS);
-//                stmt.setString(1, number);
-//                stmt.setInt(2, status);
-//                stmt.setInt(3, Statuses.NEW);
-//                int insertAmount = stmt.executeUpdate();
-//                if (insertAmount > 0) {
-//                    result = 1;
-//                }
-//            } catch (SQLException e) {
-//                LOG.info("SQLException in insertRequestAdmin method");
-//                return result;
-//            } finally {
-//                new DBCloseService().close(stmt);
-//                new DBCloseService().close(con);
-//            }
-//        } else result = 2;
-//        return result;
-//    }
+
+    public int getRequestAdmin(String number, int status) {
+        int result;
+        try { result = jdbcTemplate.queryForObject(DBQuery.GET_REQUEST_ADMIN, new Object[]{number, status}, Integer.class);}
+        catch ( DataAccessException | NullPointerException e) { result = -1;}
+        return result;
+    }
+
+    public int insertRequestAdmin(String number, int status) {
+        int result = 0;
+        try { result = jdbcTemplate.update(DBQuery.INSERT_REQUEST_ADMIN, number, status, Statuses.NEW);}
+        catch ( DataAccessException ignored) {}
+        return result;
+    }
 //
 //    public int updateRequestAdmin(int cardNumber, int statusRequest) throws DBException {
 //        Connection con = null;
@@ -246,10 +200,7 @@ public class DBCardService {
 //        return result;
 //    }
 //
-    public int cardBalanceChange(String cardNumber, double newBalance) {
-        int result = jdbcTemplate.update(DBQuery.CARD_BALANCE_CHANGE, newBalance, cardNumber);
-        return result;
-    }
+
 //
 //    public boolean equalsCardPassword(String number, String password) {
 //        boolean result = false;
