@@ -19,10 +19,7 @@ public class CardMenuService {
             String parameterSort =  new Service().getParameter(session,request, "actualParamSortCardMenu");
             String response;
 
-            if(parameterSort==null) {
-                System.out.println("null");
-                parameterSort = "balance";}
-        System.out.println(parameterSort);
+            if(parameterSort==null) { parameterSort = "balance";}
             session.setAttribute("actualParamSortCardMenu", parameterSort);
 
             List<String> paramSortList = Arrays.asList("balance", "number", "validity_period");

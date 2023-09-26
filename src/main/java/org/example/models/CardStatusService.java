@@ -33,7 +33,7 @@ public class CardStatusService {
         String password = service.getParameter(session, request, "passwordCard");
         int updateResult;
 
-            if (actualStatus.equals("unblock")) {
+            if (actualStatus.equals(Statuses.UNBLOCK_STRING)) {
                 if(cardAccount.getPassword().equals(password)) {
                     updateResult = cardService.cardStatusChange(cardNumber, Statuses.BLOCK);
                     if (updateResult == 0) return "redirect:/infoMessage?message=updateCardStatusErr";
@@ -44,11 +44,10 @@ public class CardStatusService {
                     int getRequestAdmin = cardService.getRequestAdmin(cardNumber, Statuses.NEW);
                     if (getRequestAdmin == 0) {
                         updateResult = cardService.insertRequestAdmin(cardNumber, Statuses.BLOCK);
-                        if (updateResult == 0) return "/infoMessage?message=sendRequestAdminErr";
-                        else return "/infoMessage?message=sendRequestAdmin";
-                    }
-                    return "/infoMessage?message=duplicateSendRequestAdminErr";
-                }else return "/infoMessage?&message=sendRequestAdminErrPassword";
+                        if (updateResult == 0) return "redirect:/infoMessage?message=sendRequestAdminErr";
+                        else return "redirect:/infoMessage?message=sendRequestAdmin";
+                    } else return "redirect:/infoMessage?message=duplicateSendRequestAdminErr";
+                }else return "redirect:/infoMessage?message=sendRequestAdminErrPassword";
             }
     }
 

@@ -1,18 +1,12 @@
 package org.example.dbServices;
 
-import org.example.connection.DataSource;
-import org.example.entities.CardAccount;
 import org.example.entities.Payment;
-import org.example.services.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.sql.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component

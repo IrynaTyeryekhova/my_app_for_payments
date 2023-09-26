@@ -1,5 +1,6 @@
 package org.example.models;
 
+import org.example.dbServices.Statuses;
 import org.example.entities.CardAccount;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,7 +14,8 @@ public class CardStatusInfoService {
             CardAccount cardAccount = (CardAccount) session.getAttribute("cardInfo");
             String statusChangeMessage = "";
             String button = "";
-            if(cardAccount.getStatusCard().equals("unblock")) {
+
+            if(cardAccount.getStatusCard().equals(Statuses.UNBLOCK_STRING)) {
                     statusChangeMessage = "message.statusChangeMessageBlock";
                     button = "button.block";
             } else {
