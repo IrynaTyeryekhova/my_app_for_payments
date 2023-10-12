@@ -13,5 +13,6 @@ public class DBQuery {
     public static final String GET_REQUEST_ADMIN = "SELECT count(*) AS count FROM request_admin WHERE card=? AND statusAdmin=?";
     public static final String INSERT_REQUEST_ADMIN = "INSERT INTO request_admin (card, cardStatus, statusAdmin) values (?, ?, ?)";
     public static final String GET_COUNT_ALL_PAYMENTS_FOR_CARD = "SELECT count(*) AS count FROM payments WHERE cardNumber=?";
+    public static final String GET_COUNT_ALL_PAYMENTS_FOR_CLIENT = "SELECT count(*) AS count FROM payments WHERE clientEMail=?";
     public static final String FIND_ALL_PAYMENTS_FOR_CARD_WITH_LIMIT = "SELECT * FROM payments INNER JOIN statuses ON payments.status = statuses.id WHERE cardNumber=? ORDER BY ? " + " " + "?" + " " + " limit ? offset ?";
 }

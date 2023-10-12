@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -76,49 +77,23 @@ public class DBPaymentService {
             paymentCount = jdbcTemplate.queryForObject(DBQuery.GET_COUNT_ALL_PAYMENTS_FOR_CARD, new Object[]{number}, Integer.class);
         } catch (DataAccessException ignored) {}
         return paymentCount;
-
-        //        String query = "SELECT count(*) AS count FROM payments WHERE card_number=?";
-//        try (Connection con = DataSource.getConnection();
-//             PreparedStatement stmt = con.prepareStatement(query);) {
-//            stmt.setString(1, number);
-//            try (ResultSet rs = stmt.executeQuery()) {
-//                while (rs.next()) {
-//                    paymentCount = (rs.getInt(Fields.COUNT));
-//                }
-//            }
-//        } catch (SQLException e) {
-//            LOG.info("SQLException in getCountAllPaymentsForCard method");
-//            return -1;
-//        }
-//        return paymentCount;
     }
+
     public List<Payment> findAllPaymentsForCardWithLimit(String cardNumber, String orderBy, String typeSort, int limit, int offset) {
         List<Payment> payments;
         try {
-            payments = jdbcTemplate.query("SELECT * FROM payments INNER JOIN statuses ON payments.status = statuses.id WHERE cardNumber=? ORDER BY " + orderBy + " " + typeSort + " limit ? offset ?", new Object[]{cardNumber, limit, offset}, new BeanPropertyRowMapper<>(Payment.class));
+            payments = jdbcTemplate.query("SELECT * FROM payments " +
+                                              "INNER JOIN statuses " +
+                                              "ON payments.status = statuses.id " +
+                                              "WHERE cardNumber=? ORDER BY " +
+                                              orderBy + " " + typeSort +
+                                              " limit ? offset ?",
+                                              new Object[]{cardNumber, limit, offset},
+                                              new BeanPropertyRowMapper<>(Payment.class));
         } catch (DataAccessException ignored) {
             return null;
         }
         return payments;
-//        Payment payment = null;
-//        String query = "SELECT * FROM payments INNER JOIN statuses ON payments.status_id = statuses.id WHERE card_number=? ORDER BY " + orderBy + " " + typeSort + " limit ? offset ?";
-//        try (Connection con = DataSource.getConnection();
-//             PreparedStatement stmt = con.prepareStatement(query);) {
-//            stmt.setString(1, cardNumber);
-//            stmt.setInt(2, limit);
-//            stmt.setInt(3, offset);
-//            try (ResultSet rs = stmt.executeQuery()) {
-//                while (rs.next()) {
-//                    payment = new Payment(rs.getString(Fields.PAYMENT_DATE), rs.getDouble(Fields.PAYMENT_SUM), rs.getString(Fields.PAYMENT_PURPOSE), rs.getString(Fields.PAYMENT_CLIENT), rs.getString(Fields.PAYMENT_CARD), rs.getString(Fields.STATUS_NAME));
-//                    payment.setId(rs.getInt(Fields.PAYMENTS_ID));
-//                    payments.add(payment);
-//                }
-//            }
-//        } catch (SQLException e) {
-//            LOG.info("SQLException in findAllPaymentsForCardWithLimit method");
-//            return null;
-//        }
-//        return payments;
     }
 //
 //    public List<Payment> findAllPaymentsForStatus(String email, int status, String orderBy, String typeSort, int limit, int offset) {
@@ -145,8 +120,21 @@ public class DBPaymentService {
 //        return payments;
 //    }
 //
-//    public ArrayList<Payment> findAllPayments(String email, String orderBy, String typeSort, int limit, int offset) {
-//        ArrayList<Payment> payments = new ArrayList<>();
+    public List<Payment> findAllPaymentsForClientWithLimit(String email, String orderBy, String typeSort, int limit, int offset) {
+        List<Payment> payments;
+        try {
+            payments = jdbcTemplate.query("SELECT * FROM payments " +
+                                              "INNER JOIN statuses " +
+                                              "ON payments.status = statuses.id " +
+                                              "WHERE clientEMail=? ORDER BY " +
+                                              orderBy + " " + typeSort +
+                                              " limit ? offset ?",
+                                              new Object[]{email, limit, offset},
+                                              new BeanPropertyRowMapper<>(Payment.class));
+        } catch (DataAccessException ignored) {
+            return null;
+        }
+        return payments;
 //        Payment payment = null;
 //        String query = "SELECT * FROM payments INNER JOIN statuses ON payments.status_id = statuses.id WHERE client_id=? ORDER BY " + orderBy + " " + typeSort + " limit ? offset ?";
 //        try (Connection con = DataSource.getConnection();
@@ -166,25 +154,15 @@ public class DBPaymentService {
 //            return null;
 //        }
 //        return payments;
-//    }
-//
-//    public int getCountAllPaymentsForClient(String email) {
-//        int paymentCount = 0;
-//        String query = "SELECT count(*) AS count FROM payments WHERE client_id=?";
-//        try (Connection con = DataSource.getConnection();
-//             PreparedStatement stmt = con.prepareStatement(query);) {
-//            stmt.setString(1, email);
-//            try (ResultSet rs = stmt.executeQuery()) {
-//                while (rs.next()) {
-//                    paymentCount = (rs.getInt(Fields.COUNT));
-//                }
-//            }
-//        } catch (SQLException e) {
-//            LOG.info("SQLException in getCountAllPaymentsForClient method");
-//            return -1;
-//        }
-//        return paymentCount;
-//    }
+    }
+
+    public int getCountAllPaymentsForClient(String email) {
+        int paymentCount = -1;
+        try {
+            paymentCount = jdbcTemplate.queryForObject(DBQuery.GET_COUNT_ALL_PAYMENTS_FOR_CLIENT, new Object[]{email}, Integer.class);
+        } catch (DataAccessException ignored) {}
+        return paymentCount;
+    }
 //
 //    public int getCountAllPaymentsForStatus(String email, int status) {
 //        int paymentCount = 0;

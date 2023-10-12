@@ -17,8 +17,6 @@ public class CardBalanceService {
             CardAccount cardAccount = (CardAccount) session.getAttribute("cardInfo");
             String newBalance = service.getParameter(session, request, "newSum");
             String passwordCard = service.getParameter(session, request, "passwordCard");
-            System.out.println(passwordCard + " passwordCard");
-            System.out.println(cardAccount.getPassword() + " carAccountPassword");
 //            int balanceChange;
 //            if (action.equals("balanceChange")){
             if (cardAccount.getPassword().equals(passwordCard)) {
