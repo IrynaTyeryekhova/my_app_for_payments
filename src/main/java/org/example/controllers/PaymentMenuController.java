@@ -4,6 +4,7 @@ import org.example.dbServices.DBPaymentService;
 import org.example.models.PaymentMenuService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,5 +22,10 @@ public class PaymentMenuController {
     @GetMapping
     public String paymentMenuGet(HttpServletRequest req) {
        return new PaymentMenuService().paymentMenuMake(req, paymentsService);
+    }
+
+    @PostMapping
+    public String paymentMenuPost() {
+        return "paymentsInfo";
     }
 }

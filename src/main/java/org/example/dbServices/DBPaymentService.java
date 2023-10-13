@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -124,36 +123,17 @@ public class DBPaymentService {
         List<Payment> payments;
         try {
             payments = jdbcTemplate.query("SELECT * FROM payments " +
-                                              "INNER JOIN statuses " +
-                                              "ON payments.status = statuses.id " +
-                                              "WHERE clientEMail=? ORDER BY " +
-                                              orderBy + " " + typeSort +
-                                              " limit ? offset ?",
-                                              new Object[]{email, limit, offset},
-                                              new BeanPropertyRowMapper<>(Payment.class));
+                            "INNER JOIN statuses " +
+                            "ON payments.status = statuses.id " +
+                            "WHERE clientEMail=? ORDER BY " +
+                            orderBy + " " + typeSort +
+                            " limit ? offset ?",
+                    new Object[]{email, limit, offset},
+                    new BeanPropertyRowMapper<>(Payment.class));
         } catch (DataAccessException ignored) {
             return null;
         }
         return payments;
-//        Payment payment = null;
-//        String query = "SELECT * FROM payments INNER JOIN statuses ON payments.status_id = statuses.id WHERE client_id=? ORDER BY " + orderBy + " " + typeSort + " limit ? offset ?";
-//        try (Connection con = DataSource.getConnection();
-//             PreparedStatement stmt = con.prepareStatement(query);) {
-//            stmt.setString(1, email);
-//            stmt.setInt(2, limit);
-//            stmt.setInt(3, offset);
-//            try (ResultSet rs = stmt.executeQuery()) {
-//                while (rs.next()) {
-//                    payment = new Payment(rs.getString(Fields.PAYMENT_DATE), rs.getDouble(Fields.PAYMENT_SUM), rs.getString(Fields.PAYMENT_PURPOSE), rs.getString(Fields.PAYMENT_CLIENT), rs.getString(Fields.PAYMENT_CARD), rs.getString(Fields.STATUS_NAME));
-//                    payment.setId(rs.getInt(Fields.PAYMENTS_ID));
-//                    payments.add(payment);
-//                }
-//            }
-//        } catch (SQLException e) {
-//            LOG.info("SQLException in findAllPayments method");
-//            return null;
-//        }
-//        return payments;
     }
 
     public int getCountAllPaymentsForClient(String email) {

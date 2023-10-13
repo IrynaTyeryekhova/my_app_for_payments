@@ -19,29 +19,22 @@ public class PaymentMenuService {
         String email = service.getParameter(session, request, "ClientEMail");
 
         PaginationService paginationService = new PaginationService();
-        paginationService.parametersSortMake(request, "listParamSortPayment", "selectParamSortPayments", "id", "date", "sum");
+        paginationService.parametersSortMake(request, "listParamSortPayment", "selectParamSortPayments", "paymentNumber", "date", "sum");
 
         int countAllPaymentsForClient = paymentsService.getCountAllPaymentsForClient(email);
 
-        if (countAllPaymentsForClient == -1) {
-            System.out.println("1");
-            return "redirect:/infoMessage?message=error";
-        }
+        if (countAllPaymentsForClient == -1) return "redirect:/infoMessage?message=error";
         else {
             paginationService.paginationMake(request, countAllPaymentsForClient);
 
             Integer limit = Integer.valueOf(String.valueOf(session.getAttribute("selectCountShow")));
             Integer numberPage = Integer.valueOf(String.valueOf(session.getAttribute("numberPage")));
-            System.out.println(limit + " limit");
-            System.out.println(numberPage + " number page");
-            int offSet = (numberPage * limit) - limit;
-            System.out.println(offSet + " offset");;
-            List<Payment> payments = paymentsService.findAllPaymentsForCardWithLimit(email, "payments." + (String) session.getAttribute("selectParamSortPayments"), (String) session.getAttribute("selectParamSortType"), limit, offSet);
 
-            if (payments == null) {
-                System.out.println("2");
-                return "redirect:/infoMessage?message=error";
-            }
+            int offSet = (numberPage * limit) - limit;
+
+            List<Payment> payments = paymentsService.findAllPaymentsForClientWithLimit(email, "payments." + (String) session.getAttribute("selectParamSortPayments"), (String) session.getAttribute("selectParamSortType"), limit, offSet);
+
+            if (payments == null) return "redirect:/infoMessage?message=error";
             else {
                 session.setAttribute("payments", payments);
                 return "paymentsInfo";
