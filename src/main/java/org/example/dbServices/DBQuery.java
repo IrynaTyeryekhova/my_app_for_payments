@@ -6,6 +6,7 @@ public class DBQuery {
             "WHERE clients.eMail=?";
     public static final String INSERT_CLIENT = "INSERT INTO clients (eMail, password, userName, role, status) values (?, ?, ?, ?, ?);";
     public static final String FIND_ALL_CARD_FOR_CLIENT = "SELECT * FROM cards WHERE cards.client=?";
+    public static final String FIND_ALL_CARD_FOR_CLIENT_WITH_STATUS = "SELECT * FROM cards WHERE cards.client=? AND cards.statusCard=?";
     public static final String GET_CARD_INFO = "SELECT * FROM cards INNER JOIN statuses ON cards.statusCard = statuses.id WHERE cards.number=?";
     public static final String INSERT_CARD = "INSERT INTO cards (number, balance, validityPeriod, password, statusCard, client) values (?, ?, ?, ?, ?, ?)";
     public static final String CARD_BALANCE_CHANGE = "UPDATE cards c SET c.balance=? WHERE c.number=?";

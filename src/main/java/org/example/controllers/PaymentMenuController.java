@@ -28,4 +28,5 @@ public class PaymentMenuController {
     public String paymentMenuPost() {
         return "paymentsInfo";
     }
+
 }

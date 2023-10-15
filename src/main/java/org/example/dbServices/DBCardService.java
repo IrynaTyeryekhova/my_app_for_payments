@@ -1,6 +1,7 @@
 package org.example.dbServices;
 
 import org.example.entities.CardAccount;
+import org.example.entities.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -49,27 +50,18 @@ public class DBCardService {
     public List<CardAccount> findAllCardForClient(String email) {
         return jdbcTemplate.query(DBQuery.FIND_ALL_CARD_FOR_CLIENT, new Object[]{email}, new BeanPropertyRowMapper<>(CardAccount.class));
     }
-//
-//    public List<CardAccount> findAllCardClientForStatus(String email, int status) throws DBException {
-//        List<CardAccount> cards = new ArrayList<>();
-//        CardAccount card = null;
-//        String query = "SELECT * FROM cards WHERE cards.client_id=? AND cards.status_id=?";
-//        try (Connection con = DataSource.getConnection();
-//             PreparedStatement stmt = con.prepareStatement(query);) {
-//            stmt.setString(1, email);
-//            stmt.setInt(2, status);
-//            try (ResultSet rs = stmt.executeQuery()) {
-//                while (rs.next()) {
-//                    card = new CardAccount(rs.getString(Fields.CARD_NUMBER), rs.getDouble(Fields.CARD_BALANCE), rs.getString(Fields.CARD_VALIDITY_PERIOD));
-//                    cards.add(card);
-//                }
-//            }
-//        } catch (SQLException e) {
-//            LOG.info("SQLException in findAllCardClientForStatus method");
-//            return null;
-//        }
-//        return cards;
-//    }
+
+    public List<CardAccount> findAllCardForClientWithStatus(String email, int status) {
+        List<CardAccount> cards;
+        try {
+            cards = jdbcTemplate.query(DBQuery.FIND_ALL_CARD_FOR_CLIENT_WITH_STATUS,
+                                       new Object[]{email, status},
+                                       new BeanPropertyRowMapper<>(CardAccount.class));
+        } catch (DataAccessException ignored) {
+            return null;
+        }
+        return cards;
+    }
 //
 //    public List<CardAccount> findAllCardForRequestAdmin(int status, String orderBy, String typeSort, int limit, int offset) {
 //        List<CardAccount> cards = new ArrayList<>();
