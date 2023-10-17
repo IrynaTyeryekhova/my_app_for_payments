@@ -2,7 +2,7 @@
 <html lang="${param.lang}" xmlns:th="http://thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Application for payments</title>
+    <title th:text="#{text.payments}"></title>
     <link type="text/css" th:href="@{static/css/stylesheet.css}" rel="stylesheet">
     <link type="text/css" th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
 </head>
@@ -39,7 +39,7 @@
            _____________________________________________ <br>
            <p th:text="#{button.makePayment}" ></p>
 
-           <form th:action="#{form.actionPaymentsCreateInfo}" th:method="get">
+           <form th:action="#{form.actionPaymentsCreateInfo.page.new}" th:method="get">
                <button type="submit" class="btn btn-black" th:text="#{button.create}" > </button>
            </form>
            _____________________________________________ <br>
