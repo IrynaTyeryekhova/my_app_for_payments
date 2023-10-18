@@ -16,7 +16,6 @@ public class CardAddService {
 
             int insertResult = dbCardService.insertCard(cardAccount, email);
             if (insertResult == 0) return "redirect:/infoMessage?message=insertCardErr";
-//            return "redirect:/cardAdd?mess=card";
             return "redirect:/infoMessage?message=card";
         }
     }

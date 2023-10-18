@@ -61,9 +61,24 @@ public class InfoMessage {
         } else if (message.equals("duplicateSendRequestAdminErr")) {
             infoMessage = "message.duplicateSendRequestAdminErr";
             infoMessageMenu = "message.menu.cardStatus";
+        } else if (message.equals("choiceCardNumberEmpty")) {
+            infoMessage = "message.choiceCardNumberEmpty";
+            infoMessageMenu = "message.menu.creatingPayment";
+        } else if (message.equals("insufficientBalance")) {
+            infoMessage = "message.insufficientBalance";
+            infoMessageMenu = "message.menu.creatingPayment";
+        } else if (message.equals("cardPasswordAddPaymentNotEquals")) {
+            infoMessage = "message.cardPasswordAddPaymentNotEquals";
+            infoMessageMenu = "message.menu.creatingPayment";
+        } else if (message.equals("addPayment")) {
+            infoMessage = "message.addPayment";
+            infoMessageMenu = "message.menu.creatingPayment";
+        } else if (message.equals("addPaymentErr")) {
+            infoMessage = "message.addPaymentErr";
+            infoMessageMenu = "message.menu.creatingPayment";
         }
 
-        session.setAttribute("infoMessage", infoMessage);
+            session.setAttribute("infoMessage", infoMessage);
         session.setAttribute("infoMessageMenu", infoMessageMenu);
 
         if (adminPage.equals("true")) response = "adminInformationPage";

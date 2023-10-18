@@ -26,18 +26,7 @@ public class PaymentCreateInfoController{
 
     @PostMapping("/new")
     public String PaymentCreateInfoNewPost(@ModelAttribute("payment") Payment payment, HttpServletRequest request){
-        System.out.println("PM");
         return new PaymentCreateInfoService().paymentAddInfoMake(request, cardService);
     }
-//
-//    @GetMapping()
-//    public String PaymentCreateInfoGet(@ModelAttribute("payment") Payment payment, HttpServletRequest request){
-//        return new PaymentCreateInfoService().paymentAddInfoMake(request, cardService);
-//    }
-//
-//    @PostMapping()
-//    public String PaymentCreateInfoPost(@ModelAttribute("payment") @Valid Payment payment, BindingResult bindingResult, HttpServletRequest request){
-//        if(bindingResult.hasErrors()) return "paymentAddInfo";
-//        return new PaymentCreateInfoService().paymentAddInfoMake(request, cardService);
-//    }
+
 }

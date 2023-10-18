@@ -1,7 +1,6 @@
 package org.example.dbServices;
 
 import org.example.entities.CardAccount;
-import org.example.entities.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

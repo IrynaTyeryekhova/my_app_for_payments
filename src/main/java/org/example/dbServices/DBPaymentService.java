@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -17,34 +18,19 @@ public class DBPaymentService {
     public DBPaymentService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-//    public int insertPayment(Double paymentSum, String purposePayment, String email, String number) throws DBException {
-//        Connection con = null;
-//        PreparedStatement stmt = null;
-//        int result = 0;
-//        final String queryMySQL = "INSERT INTO payments (date, sum, purpose_payment, client_id, card_number, status_id) values (?, ?, ?, ?, ?, ?)";
-//        try {
-//            con = DataSource.getConnection();
-//            stmt = con.prepareStatement(queryMySQL, Statement.RETURN_GENERATED_KEYS);
-//            stmt.setString(1, LocalDate.now().toString());
-//            stmt.setDouble(2, paymentSum);
-//            stmt.setString(3, purposePayment);
-//            stmt.setString(4, email);
-//            stmt.setString(5, number);
-//            stmt.setInt(6, Statuses.PREPARED);
-//
-//            int insertAmount = stmt.executeUpdate();
-//            if (insertAmount > 0) {
-//                result = 1;
-//                }
-//        } catch (SQLException e) {
-//            LOG.info("SQLException in insertPayment method");
-//            return result;
-//        } finally {
-//            new DBCloseService().close(stmt);
-//            new DBCloseService().close(con);
-//        }
-//        return result;
-//    }
+
+    public int insertPayment(Payment payment, String email, String number){
+        int result = 0;
+        try {
+            result = jdbcTemplate.update(DBQuery.INSERT_PAYMENT, LocalDate.now().toString(),
+                                                                 payment.getSum(),
+                                                                 payment.getPurposePayment(),
+                                                                 email,
+                                                                 number,
+                                                                 Statuses.PREPARED);
+        } catch (DataAccessException ignored) {}
+        return result;
+    }
 //
 //    public int updatePaymentStatus(int id, int status) throws DBException {
 //        Connection con = null;
