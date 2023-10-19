@@ -19,8 +19,6 @@ public class PaymentCreateService {
         HttpSession session = request.getSession();
         Service service = new Service();
         String choiceCardNumber = service.getParameter(session, request, "choiceCardNumber");
-//        String paymentSum = service.getParameter(session, req, "paymentSum");
-//        String purposePayment = service.getParameter(session, req, "purposePayment");
         String cardPasswordAddPayment = service.getParameter(session, request, "cardPasswordAddPayment");
         String eMail = service.getParameter(session, request, "ClientEMail");
 

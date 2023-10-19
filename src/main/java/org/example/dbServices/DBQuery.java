@@ -16,5 +16,6 @@ public class DBQuery {
     public static final String INSERT_PAYMENT = "INSERT INTO payments (date, sum, purposePayment, clientEMail, cardNumber, status) values (?, ?, ?, ?, ?, ?)";
     public static final String GET_COUNT_ALL_PAYMENTS_FOR_CARD = "SELECT count(*) AS count FROM payments WHERE cardNumber=?";
     public static final String GET_COUNT_ALL_PAYMENTS_FOR_CLIENT = "SELECT count(*) AS count FROM payments WHERE clientEMail=?";
+    public static final String GET_COUNT_ALL_PAYMENTS_FOR_STATUS="SELECT count(*) AS count FROM payments WHERE clientEMail=? AND status=?";
     public static final String FIND_ALL_PAYMENTS_FOR_CARD_WITH_LIMIT = "SELECT * FROM payments INNER JOIN statuses ON payments.status = statuses.id WHERE cardNumber=? ORDER BY ? " + " " + "?" + " " + " limit ? offset ?";
 }
