@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="${param.lang}" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="#{text.payments}"></title>
+    <link type="text/css" th:href="@{static/css/stylesheet.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
+</head>
+  <body>
+   <div class="sidenav">
+       <div class="login-main-text">
+           <h2><p th:text="#{name.app}"></p>
+               <p th:text="#{name.app.confirmationPayment}" ></p>
+               _____________________________________________ <br>
+           </h2>
+
+           <p th:text="#{name.app.action.sort}" >
+               <form style="font-size: xx-small; margin: 0 0 0 0" th:action="#{form.actionPaymentPrepared}" th:method="get">
+
+                   <select id="selectParamSortPreparedPayments" class="btn btn-black-option" name="selectParamSortPreparedPayments">
+                       <option style="font-size: small; margin: 0 0 0 0" th:each="sort : ${session.listParamSortPreparedPayment}" th:selected="${sort == session.selectParamSortPreparedPayments}" th:value="${sort}" th:utext="#{${sort}}"></option>
+                   </select>
+
+                   <select id="selectParamSortType" class="btn btn-black-option" name="selectParamSortType">
+                       <option style="font-size: small; margin: 0 0 0 0" th:each="sort : ${session.listParamSortType}" th:selected="${sort == session.selectParamSortType}" th:value="${sort}" th:utext="#{${sort}}" ></option>
+                   </select>
+
+                   <button type="submit" class="btn btn-black-option" th:text="#{button.apply}" ></button>
+               </form>
+           </p>
+           <p th:text="#{name.app.action.showBy}" >
+               <form style="font-size: xx-small; margin: 0 0 0 0" th:action="#{form.actionPaymentPrepared}" th:method="get">
+                   <select id="selectCountShow" class="btn btn-black-option" name="selectCountShow">
+                       <option style="font-size: small; margin: 0 0 0 0" th:each="sort : ${session.listCountShow}" th:selected="${sort == session.selectCountShow}" th:value="${sort}" th:utext="${sort}" ></option>
+                   </select>
+                   <button type="submit" class="btn btn-black-option" th:text="#{button.apply}" ></button>
+               </form>
+           </p>
+           _____________________________________________ <br>
+           <p th:text="#{button.backToPayments}"></p>
+
+           <form th:action="#{form.actionPaymentsMenu}" th:method="get">
+               <button type="submit" class="btn btn-black" th:text="#{text.payments}" ></button>
+           </form>
+
+           _____________________________________________ <br>
+           <p th:text="#{languageChangeText}" ></p>
+
+           <form th:action="#{languageChangeLink}"  th:method="post">
+               <button type="submit" class="btn btn-black" th:text="#{languageChangeButton}" ></button>
+           </form>
+       </div>
+   </div>
+   <div class="main">
+       <form th:action="#{form.actionExit}" th:method="post">
+           <button style = "margin-left: 85%; margin-top: 1%;"type="submit" class="btn btn-blacktwo" th:text="#{button.logOut}" ></button>
+       </form>
+       <div >
+           <form th:action="#{form.actionPaymentPrepared}" th:method="get">
+               <button style = " padding: 0px 0px 0px 0px; margin: 12% 0 0 23%;position: fixed;  z-index: 1; font-weight: 100; padding: 6px" type="submit" class="btn btn-blacktwo" name = "previousPage" value = "1" th:text="#{button.back}" ></button>
+               <button style = "background-color: #000 !important; color: #FFF; width: 30px; padding: 0px 0px 0px 0px; margin: 12% 0 0 30.55%;position: fixed;  z-index: 1; font-weight: 100; padding: 5px"th:text="${session.numberPage}"></button>
+               <button style = " padding: 0px 0px 0px 0px; margin: 12% 0 0 33%;position: fixed;  z-index: 1; font-weight: 100; padding: 6px" type="submit" class="btn btn-blacktwo" name = "nextPage" value = "1" th:text="#{button.next}" ></button>
+           </form>
+       </div>
+       <div>
+           <form th:action="#{form.actionPaymentSend}" th:method="post">
+               <table class= "tablePayments" style="font-family: Arial, sans-serif; width: 42%;text-align: center; margin-left: 10%; margin-top: 16%; position: fixed;  z-index: 1; font-weight: 100; padding: 60px" border = "3">
+                   <tr>
+                       <th th:text="#{payment.info.number}"> </th>
+                       <th th:text="#{payment.info.date}"> </th>
+                       <th th:text="#{payment.info.sum}"> </th>
+                       <th th:text="#{payment.info.status}"> </th>
+                       <th th:text="#{payment.info.cardNumber}"> </th>
+                       <th th:text="#{payment.info.purpose}"> </th>
+                   </tr>
+
+                   <tr th:each="sort : ${session.preparedPayments}">
+                       <td th:text="${sort.getPaymentNumber()}"> </td>
+                       <td th:text="${sort.getDate()}"> </td>
+                       <td th:text="${sort.getSum()}"> </td>
+                       <td th:text="#{${sort.getStatus()}}"> </td>
+                       <td th:text="${sort.getCardNumber()}"> </td>
+                       <td th:text="${sort.getPurposePayment()}"> </td>
+                       <td> <button type="submit" class="btn btn-blacktwo" name = "paymentIdSend" value = "${sort.getId()}" th:text="#{button.send}" ></button></td>
+                   </tr>
+               </table>
+           </form>
+       </div>
+   </div>
+  </body>
+</html>
