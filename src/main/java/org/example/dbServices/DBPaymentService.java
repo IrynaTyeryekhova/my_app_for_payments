@@ -31,6 +31,17 @@ public class DBPaymentService {
         } catch (DataAccessException ignored) {}
         return result;
     }
+
+    public Payment getPaymentInfo(int id) {
+        try {
+            return jdbcTemplate.query(DBQuery.GET_PAYMENT_INFO,
+                    new Object[]{id},
+                    new BeanPropertyRowMapper<>(Payment.class)).stream().findAny().orElse(null);
+        } catch (DataAccessException ignored) {
+            return null;
+        }
+    }
+
 //
 //    public int updatePaymentStatus(int id, int status) throws DBException {
 //        Connection con = null;
@@ -60,6 +71,22 @@ public class DBPaymentService {
         int paymentCount = -1;
         try {
             paymentCount = jdbcTemplate.queryForObject(DBQuery.GET_COUNT_ALL_PAYMENTS_FOR_CARD, new Object[]{number}, Integer.class);
+        } catch (DataAccessException ignored) {}
+        return paymentCount;
+    }
+
+    public int getCountAllPaymentsForClient(String email) {
+        int paymentCount = -1;
+        try {
+            paymentCount = jdbcTemplate.queryForObject(DBQuery.GET_COUNT_ALL_PAYMENTS_FOR_CLIENT, new Object[]{email}, Integer.class);
+        } catch (DataAccessException ignored) {}
+        return paymentCount;
+    }
+
+    public int getCountAllPaymentsForStatus(String email, int status) {
+        int paymentCount = -1;
+        try {
+            paymentCount = jdbcTemplate.queryForObject(DBQuery.GET_COUNT_ALL_PAYMENTS_FOR_STATUS, new Object[]{email, status}, Integer.class);
         } catch (DataAccessException ignored) {}
         return paymentCount;
     }
@@ -115,37 +142,4 @@ public class DBPaymentService {
         return payments;
     }
 
-    public int getCountAllPaymentsForClient(String email) {
-        int paymentCount = -1;
-        try {
-            paymentCount = jdbcTemplate.queryForObject(DBQuery.GET_COUNT_ALL_PAYMENTS_FOR_CLIENT, new Object[]{email}, Integer.class);
-        } catch (DataAccessException ignored) {}
-        return paymentCount;
-    }
-
-    public int getCountAllPaymentsForStatus(String email, int status) {
-        int paymentCount = -1;
-        try {
-            paymentCount = jdbcTemplate.queryForObject(DBQuery.GET_COUNT_ALL_PAYMENTS_FOR_STATUS, new Object[]{email, status}, Integer.class);
-        } catch (DataAccessException ignored) {}
-        return paymentCount;
-    }
-//
-//    public Payment getPaymentInfo(int id) {
-//        Payment payment = null;
-//        String query = "SELECT * FROM payments INNER JOIN statuses ON payments.status_id = statuses.id WHERE payments.id=?";
-//        try (Connection con = DataSource.getConnection();
-//             PreparedStatement stmt = con.prepareStatement(query);) {
-//            stmt.setInt(1, id);
-//            try (ResultSet rs = stmt.executeQuery()) {
-//                while (rs.next()) {
-//                    payment = new Payment(rs.getString(Fields.PAYMENT_DATE), rs.getDouble(Fields.PAYMENT_SUM), rs.getString(Fields.PAYMENT_PURPOSE), rs.getString(Fields.PAYMENT_CLIENT), rs.getString(Fields.PAYMENT_CARD), rs.getString(Fields.STATUS_NAME));
-//                }
-//            }
-//        } catch (SQLException e) {
-//            LOG.info("SQLException in getPaymentInfo method");
-//            return payment;
-//        }
-//        return payment;
-//    }
 }
