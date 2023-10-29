@@ -42,31 +42,14 @@ public class DBPaymentService {
         }
     }
 
-//
-//    public int updatePaymentStatus(int id, int status) throws DBException {
-//        Connection con = null;
-//        PreparedStatement stmt = null;
-//        int result = 0;
-//        final String queryMySQL = "UPDATE payments SET status_id=? WHERE id=?";
-//        try {
-//            con = DataSource.getConnection();
-//            stmt = con.prepareStatement(queryMySQL, Statement.RETURN_GENERATED_KEYS);
-//            stmt.setInt(1, status);
-//            stmt.setInt(2, id);
-//            int insertAmount = stmt.executeUpdate();
-//            if (insertAmount > 0) {
-//                result = 1;
-//            }
-//        } catch (SQLException e) {
-//            LOG.info("SQLException in updatePaymentStatus method");
-//            return result;
-//        } finally {
-//            new DBCloseService().close(stmt);
-//            new DBCloseService().close(con);
-//        }
-//        return result;
-//    }
-//
+    public int updatePaymentStatus(int id, int status) {
+        int result = -1;
+        try {
+            result = jdbcTemplate.update(DBQuery.UPDATE_PAYMENT_STATUS, status, id);
+        } catch (DataAccessException ignored) {}
+        return result;
+    }
+
     public int getCountAllPaymentsForCard(String number) {
         int paymentCount = -1;
         try {

@@ -11,29 +11,28 @@ public class Payment {
 
     public Payment() {}
 
-    public Payment(double sum, String date) {
-        this.sum = sum;
-        this.date = date;
-    }
-    public Payment(double sum, String date, String status, String cardNumber) {
-        this.sum = sum;
-        this.date = date;
-        this.status = status;
-        this.cardNumber = cardNumber;
-    }
-    public Payment(String date, double sum, String purposePayment, String clientEMail, String cardNumber, String status) {
-        this.date = date;
-        this.sum = sum;
-        this.purposePayment = purposePayment;
-        this.clientEMail = clientEMail;
-        this.cardNumber = cardNumber;
-        this.status = status;
-    }
+//    public Payment(double sum, String date) {
+//        this.sum = sum;
+//        this.date = date;
+//    }
+//    public Payment(double sum, String date, String status, String cardNumber) {
+//        this.sum = sum;
+//        this.date = date;
+//        this.status = status;
+//        this.cardNumber = cardNumber;
+//    }
+//    public Payment(String date, double sum, String purposePayment, String clientEMail, String cardNumber, String status) {
+//        this.date = date;
+//        this.sum = sum;
+//        this.purposePayment = purposePayment;
+//        this.clientEMail = clientEMail;
+//        this.cardNumber = cardNumber;
+//        this.status = status;
+//    }
 
     public int getPaymentNumber() {
         return paymentNumber;
     }
-
     public void setPaymentNumber(int paymentNumber) {
         this.paymentNumber = paymentNumber;
     }

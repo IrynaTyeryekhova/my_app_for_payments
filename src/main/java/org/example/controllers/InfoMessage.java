@@ -76,6 +76,18 @@ public class InfoMessage {
         } else if (message.equals("addPaymentErr")) {
             infoMessage = "message.addPaymentErr";
             infoMessageMenu = "message.menu.creatingPayment";
+        } else if (message.equals("paymentSent")) {
+            infoMessage = "message.paymentSent";
+            infoMessageMenu = "message.menu.sendingPayment";
+        } else if (message.equals("paymentSentErr")) {
+            infoMessage = "message.paymentSentErr";
+            infoMessageMenu = "message.menu.sendingPayment";
+        } else if (message.equals("paymentSentDuplicateErr")) {
+            infoMessage = "message.paymentSentDuplicateErr";
+            infoMessageMenu = "message.menu.sendingPayment";
+        } else if (message.equals("paymentSentCardBlockErr")) {
+            infoMessage = "message.paymentSentCardBlockErr";
+            infoMessageMenu = "message.menu.sendingPayment";
         }
 
             session.setAttribute("infoMessage", infoMessage);
