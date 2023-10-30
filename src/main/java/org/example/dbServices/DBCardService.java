@@ -89,26 +89,17 @@ public class DBCardService {
         int cardCount = -1;
         try {
             cardCount = jdbcTemplate.queryForObject(DBQuery.GET_COUNT_ALL_CARD_FOR_REQUEST_ADMIN, new Object[]{status}, Integer.class);
+        } catch (NullPointerException | DataAccessException ignored) {}
+        return cardCount;
+    }
+
+    public int getCountAllCard() {
+        int cardCount = -1;
+        try {
+            cardCount = jdbcTemplate.queryForObject(DBQuery.GET_COUNT_ALL_CARD, new Object[]{}, Integer.class);
         } catch (DataAccessException ignored) {}
         return cardCount;
     }
-//
-//    public int findCountAllCard() {
-//        int countCard = 0;
-//        String query = "SELECT count(*) AS count FROM cards INNER JOIN statuses ON cards.status_id = statuses.id";
-//        try (Connection con = DataSource.getConnection();
-//             PreparedStatement stmt = con.prepareStatement(query);) {
-//            try (ResultSet rs = stmt.executeQuery()) {
-//                while (rs.next()) {
-//                    countCard = rs.getInt(Fields.COUNT);
-//                }
-//            }
-//        } catch (SQLException e) {
-//            LOG.info("SQLException in findCountAllCard method");
-//            return -1;
-//        }
-//        return countCard;
-//    }
 //
 //    public List<CardAccount> findAllCardWithLimit(String orderBy, String typeSort, int limit, int offset) {
 //        List<CardAccount> cards = new ArrayList<>();
