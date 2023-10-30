@@ -1,5 +1,6 @@
 package org.example.dbServices;
 
+import org.example.entities.CardAccount;
 import org.example.entities.Client;
 import org.example.services.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class DBClientService {
@@ -60,26 +63,18 @@ public class DBClientService {
 //        }
 //        return result;
 //    }
-//
-//    public List<Client> findAllClientsForRole(int role) {
-//        List<Client> clients = new ArrayList<>();
-//        Client client = null;
-//        String query = "SELECT * FROM clients WHERE clients.role_id = ?";
-//        try (Connection con = DataSource.getConnection();
-//             PreparedStatement stmt = con.prepareStatement(query);) {
-//            stmt.setInt(1, role);
-//            try (ResultSet rs = stmt.executeQuery()) {
-//                while (rs.next()) {
-//                    client = new Client(rs.getString(Fields.E_MAIL), rs.getString(Fields.NAME));
-//                    clients.add(client);
-//                }
-//            }
-//        } catch (SQLException e) {
-//            LOG.info("SQLException in findAllClientsForRole method");
-//            return null;
-//        }
-//        return clients;
-//    }
+
+    public List<Client> findAllClientsForRole(int role) {
+        List<Client> clients;
+        try {
+            clients = jdbcTemplate.query(DBQuery.FIND_ALL_CLIENTS_FOR_ROLE,
+                    new Object[]{role},
+                    new BeanPropertyRowMapper<>(Client.class));
+        } catch (DataAccessException ignored) {
+            return null;
+        }
+        return clients;
+    }
 //
 //    public List<Client> findAllClientsForRole(int role, String orderBy, String typeSort, int limit, int offset) {
 //        List<Client> clients = new ArrayList<>();
