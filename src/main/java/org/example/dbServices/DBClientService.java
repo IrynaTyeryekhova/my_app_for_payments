@@ -2,6 +2,7 @@ package org.example.dbServices;
 
 import org.example.entities.CardAccount;
 import org.example.entities.Client;
+import org.example.entities.Payment;
 import org.example.services.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -18,20 +19,12 @@ public class DBClientService {
     public DBClientService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-//    static DBClientService instance;
-//    public static final Logger LOG= Logger.getLogger(DBClientService.class.getName());
-//    private DBClientService() {
-//    }
-//    public static synchronized DBClientService getInstance() {
-//        if (instance == null) {
-//            instance = new DBClientService();
-//        }
-//        return instance;
-//    }
+
     public Client getClientInfo(String email) {
         return jdbcTemplate.query(DBQuery.GET_CLIENT_INFO, new Object[]{email}, new BeanPropertyRowMapper<>(Client.class))
             .stream().findAny().orElse(null);
 }
+
     public int insertClient(Client client) {
         int resultInsert = 0;
         try {
@@ -75,30 +68,20 @@ public class DBClientService {
         }
         return clients;
     }
-//
-//    public List<Client> findAllClientsForRole(int role, String orderBy, String typeSort, int limit, int offset) {
-//        List<Client> clients = new ArrayList<>();
-//        Client client = null;
-//        String query = "SELECT * FROM clients INNER JOIN statuses ON clients.status_id=statuses.id " +
-//                "WHERE clients.role_id = ? ORDER BY "
-//                + orderBy + " " + typeSort + " limit ? offset ?";
-//        try (Connection con = DataSource.getConnection();
-//             PreparedStatement stmt = con.prepareStatement(query);) {
-//            stmt.setInt(1, role);
-//            stmt.setInt(2, limit);
-//            stmt.setInt(3, offset);
-//            try (ResultSet rs = stmt.executeQuery()) {
-//                while (rs.next()) {
-//                    client = new Client(rs.getString(Fields.E_MAIL), rs.getString(Fields.NAME));
-//                    client.setStatus(rs.getString(Fields.STATUS_NAME));
-//                    clients.add(client);
-//                }
-//            }
-//        } catch (SQLException e) {
-//            LOG.info("SQLException in findAllClientsForRole method");
-//        }
-//        return clients;
-//    }
 
-
+    public List<Client> findAllClientsForRoleWithLimit(int role, String orderBy, String typeSort, int limit, int offset) {
+        List<Client> clients;
+        try {
+            clients = jdbcTemplate.query("SELECT * FROM clients " +
+                                             "INNER JOIN statuses " +
+                                             "ON clients.status=statuses.id " +
+                                             "WHERE clients.role = ? ORDER BY "
+                                             + orderBy + " " + typeSort + " limit ? offset ?",
+                                             new Object[]{role, limit, offset},
+                                             new BeanPropertyRowMapper<>(Client.class));
+        } catch (DataAccessException ignored) {
+            return null;
+        }
+        return clients;
+    }
 }
