@@ -85,26 +85,13 @@ public class DBCardService {
 //        return cards;
 //    }
 //
-//    public List<CardAccount> findAllCardForRequestAdmin(int status) {
-//        List<CardAccount> cards = new ArrayList<>();
-//        CardAccount card = null;
-//        String query = "SELECT * FROM cards INNER JOIN request_admin ON cards.number = request_admin.card_number " +
-//                "WHERE request_admin.status_admin = ?";
-//        try (Connection con = DataSource.getConnection();
-//             PreparedStatement stmt = con.prepareStatement(query);) {
-//            stmt.setInt(1, status);
-//            try (ResultSet rs = stmt.executeQuery()) {
-//                while (rs.next()) {
-//                    card = new CardAccount(rs.getString(Fields.CARD_NUMBER), rs.getDouble(Fields.CARD_BALANCE), rs.getString(Fields.CARD_VALIDITY_PERIOD));
-//                    cards.add(card);
-//                }
-//            }
-//        } catch (SQLException e) {
-//            LOG.info("SQLException in findAllCardForRequestAdmin method");
-//            return null;
-//        }
-//        return cards;
-//    }
+    public int getCountAllCardForRequestAdmin(int status) {
+        int cardCount = -1;
+        try {
+            cardCount = jdbcTemplate.queryForObject(DBQuery.GET_COUNT_ALL_CARD_FOR_REQUEST_ADMIN, new Object[]{status}, Integer.class);
+        } catch (DataAccessException ignored) {}
+        return cardCount;
+    }
 //
 //    public int findCountAllCard() {
 //        int countCard = 0;
