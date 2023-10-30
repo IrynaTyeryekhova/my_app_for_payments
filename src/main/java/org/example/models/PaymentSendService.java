@@ -19,7 +19,7 @@ public class PaymentSendService {
 //        LOG.info("PaymentSendService is starting");
         HttpSession session = req.getSession();
         Service service = new Service();
-        System.out.println("1");
+
         int paymentIdSend = Integer.parseInt(String.valueOf(service.getParameter(session, req, "paymentIdSend")));
 
         Payment payment = paymentsService.getPaymentInfo(paymentIdSend);
