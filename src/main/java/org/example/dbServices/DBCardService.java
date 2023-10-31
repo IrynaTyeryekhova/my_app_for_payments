@@ -33,6 +33,41 @@ public class DBCardService {
         return resultInsert;
     }
 
+    public int insertRequestAdmin(String number, int status) {
+        int result = 0;
+        try { result = jdbcTemplate.update(DBQuery.INSERT_REQUEST_ADMIN, number, status, Statuses.NEW);}
+        catch ( DataAccessException ignored) {}
+        return result;
+    }
+
+    public CardAccount getCardInfo(String number) {
+        return jdbcTemplate.query(DBQuery.GET_CARD_INFO, new Object[]{number}, new BeanPropertyRowMapper<>(CardAccount.class))
+                .stream().findAny().orElse(null);
+    }
+
+    public int getRequestAdmin(String number, int status) {
+        int result;
+        try { result = jdbcTemplate.queryForObject(DBQuery.GET_REQUEST_ADMIN, new Object[]{number, status}, Integer.class);}
+        catch ( DataAccessException | NullPointerException e) { result = -1;}
+        return result;
+    }
+
+    public int getCountAllCard() {
+        int cardCount = -1;
+        try {
+            cardCount = jdbcTemplate.queryForObject(DBQuery.GET_COUNT_ALL_CARD, new Object[]{}, Integer.class);
+        } catch (DataAccessException ignored) {}
+        return cardCount;
+    }
+
+    public int getCountAllCardForRequestAdmin(int status) {
+        int cardCount = -1;
+        try {
+            cardCount = jdbcTemplate.queryForObject(DBQuery.GET_COUNT_ALL_CARD_FOR_REQUEST_ADMIN, new Object[]{status}, Integer.class);
+        } catch (NullPointerException | DataAccessException ignored) {}
+        return cardCount;
+    }
+
     public int cardBalanceChange(String cardNumber, double newBalance) {
         int result = 0;
         try {result = jdbcTemplate.update(DBQuery.CARD_BALANCE_CHANGE, newBalance, cardNumber);}
@@ -62,44 +97,20 @@ public class DBCardService {
         }
         return cards;
     }
-//
-//    public List<CardAccount> findAllCardForRequestAdmin(int status, String orderBy, String typeSort, int limit, int offset) {
-//        List<CardAccount> cards = new ArrayList<>();
-//        CardAccount card = null;
-//        String query = "SELECT * FROM cards INNER JOIN request_admin ON cards.number = request_admin.card_number " +
-//                "WHERE request_admin.status_admin=?  ORDER BY " + orderBy + " " + typeSort + " limit ? offset ?";
-//        try (Connection con = DataSource.getConnection();
-//             PreparedStatement stmt = con.prepareStatement(query);) {
-//            stmt.setInt(1, status);
-//            stmt.setInt(2, limit);
-//            stmt.setInt(3, offset);
-//            try (ResultSet rs = stmt.executeQuery()) {
-//                while (rs.next()) {
-//                    card = new CardAccount(rs.getString(Fields.CARD_NUMBER), rs.getDouble(Fields.CARD_BALANCE), rs.getString(Fields.CARD_VALIDITY_PERIOD));
-//                    cards.add(card);
-//                }
-//            }
-//        } catch (SQLException e) {
-//            LOG.info("SQLException in findAllCardForRequestAdmin method");
-//            return null;
-//        }
-//        return cards;
-//    }
-//
-    public int getCountAllCardForRequestAdmin(int status) {
-        int cardCount = -1;
-        try {
-            cardCount = jdbcTemplate.queryForObject(DBQuery.GET_COUNT_ALL_CARD_FOR_REQUEST_ADMIN, new Object[]{status}, Integer.class);
-        } catch (NullPointerException | DataAccessException ignored) {}
-        return cardCount;
-    }
 
-    public int getCountAllCard() {
-        int cardCount = -1;
+    public List<CardAccount> findAllCardForRequestAdminWithLimit(int status, String orderBy, String typeSort, int limit, int offset) {
+        List<CardAccount> cards;
         try {
-            cardCount = jdbcTemplate.queryForObject(DBQuery.GET_COUNT_ALL_CARD, new Object[]{}, Integer.class);
-        } catch (DataAccessException ignored) {}
-        return cardCount;
+            cards = jdbcTemplate.query("SELECT * FROM cards " +
+                                           "INNER JOIN request_admin " +
+                                           "ON cards.number = request_admin.card " +
+                                           "WHERE request_admin.statusAdmin=?  ORDER BY " + orderBy + " " + typeSort + " limit ? offset ?",
+                                           new Object[]{status, limit, offset},
+                                           new BeanPropertyRowMapper<>(CardAccount.class));
+        } catch (DataAccessException ignored) {
+            return null;
+        }
+        return cards;
     }
 
     public List<CardAccount> findAllCardWithLimit(String orderBy, String typeSort, int limit, int offset) {
@@ -118,24 +129,11 @@ public class DBCardService {
         return cards;
     }
 
-    public CardAccount getCardInfo(String number) {
-        return jdbcTemplate.query(DBQuery.GET_CARD_INFO, new Object[]{number}, new BeanPropertyRowMapper<>(CardAccount.class))
-                .stream().findAny().orElse(null);
-    }
 
-    public int getRequestAdmin(String number, int status) {
-        int result;
-        try { result = jdbcTemplate.queryForObject(DBQuery.GET_REQUEST_ADMIN, new Object[]{number, status}, Integer.class);}
-        catch ( DataAccessException | NullPointerException e) { result = -1;}
-        return result;
-    }
 
-    public int insertRequestAdmin(String number, int status) {
-        int result = 0;
-        try { result = jdbcTemplate.update(DBQuery.INSERT_REQUEST_ADMIN, number, status, Statuses.NEW);}
-        catch ( DataAccessException ignored) {}
-        return result;
-    }
+
+
+
 //
 //    public int updateRequestAdmin(int cardNumber, int statusRequest) throws DBException {
 //        Connection con = null;
