@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="${param.lang}" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="#{text.cards}"></title>
+    <link type="text/css" th:href="@{/static/css/stylesheet.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
+</head>
+<body>
+    <div class="sidenav">
+        <div class="login-main-text">
+            <h2><p th:text="#{name.app}"></p>
+                <p th:text="#{name.app.adminMenu}"></p>
+                _____________________________________________ <br>
+            </h2>
+
+            <p th:text="#{button.requestsToUnlockCards}"></p>
+            <form th:action="#{form.actionAdminCardsMenu}" th:method="get">
+                <button type="submit" class="btn btn-black" th:text="#{button.review}" > </button>
+            </form>
+
+            <p th:text="#{button.blockingUnblockingOfCards}" ></p>
+            <form th:action="#{form.actionAdminCardsMenu.blockUnblockCards}" th:method="get">
+                <button type="submit" class="btn btn-black" th:text="#{button.goTo}" ></button>
+            </form>
+
+            <p th:text="#{button.blockingUnblockingClients}" ></p>
+            <form th:action="#{form.actionAdminCardsMenu.blockUnblockClients}" th:method="get">
+                <button type="submit" class="btn btn-black" th:text="#{button.goTo}" ></button>
+            </form>
+
+            _____________________________________________ <br>
+            <p th:text="#{text.exit}" ></p>
+
+            <form th:action="#{form.actionExit}"  th:method="get">
+                <button type="submit" class="btn btn-black" th:text="#{button.logOut}" ></button>
+            </form>
+
+            _____________________________________________ <br>
+            <p th:text="#{languageChangeText}" ></p>
+
+            <form th:action="#{languageChangeLink}"  th:method="post">
+                <button type="submit" class="btn btn-black" th:text="#{languageChangeButton}" ></button>
+            </form>
+        </div>
+    </div>
+  </body>
+</html>
