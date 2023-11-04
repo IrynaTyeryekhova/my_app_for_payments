@@ -81,6 +81,13 @@ public class DBCardService {
         return result;
     }
 
+    public int requestAdminChange(int cardNumber, int statusRequest) {
+        int result = 0;
+        try {result = jdbcTemplate.update(DBQuery.REQUEST_ADMIN_CHANGE, statusRequest, cardNumber);}
+        catch (DataAccessException ignored) {}
+        return result;
+    }
+
     public List<CardAccount> findAllCardForClient(String email) {
         return jdbcTemplate.query(DBQuery.FIND_ALL_CARD_FOR_CLIENT, new Object[]{email}, new BeanPropertyRowMapper<>(CardAccount.class));
     }
@@ -133,30 +140,7 @@ public class DBCardService {
 
 
 
-//
-//    public int updateRequestAdmin(int cardNumber, int statusRequest) throws DBException {
-//        Connection con = null;
-//        PreparedStatement stmt = null;
-//        int result = 0;
-//        final String queryMySQL = "UPDATE request_admin SET status_admin=? WHERE card_number=?";
-//        try {
-//            con = DataSource.getConnection();
-//            stmt = con.prepareStatement(queryMySQL, Statement.RETURN_GENERATED_KEYS);
-//            stmt.setInt(1, statusRequest);
-//            stmt.setInt(2, cardNumber);
-//            int insertAmount = stmt.executeUpdate();
-//            if (insertAmount > 0) {
-//                result = 1;
-//            }
-//        } catch (SQLException e) {
-//            LOG.info("SQLException in updateRequestAdmin method");
-//            return result;
-//        } finally {
-//            new DBCloseService().close(stmt);
-//            new DBCloseService().close(con);
-//        }
-//        return result;
-//    }
+
 //
 
 //

@@ -12,6 +12,7 @@ public class DBQuery {
     public static final String INSERT_CARD = "INSERT INTO cards (number, balance, validityPeriod, password, statusCard, client) values (?, ?, ?, ?, ?, ?)";
     public static final String CARD_BALANCE_CHANGE = "UPDATE cards c SET c.balance=? WHERE c.number=?";
     public static final String CARD_STATUS_CHANGE = "UPDATE cards c SET c.statusCard=? WHERE c.number=?";
+    public static final String REQUEST_ADMIN_CHANGE = "UPDATE request_admin ra SET ra.statusAdmin=? WHERE ra.card=?";
     public static final String GET_REQUEST_ADMIN = "SELECT count(*) AS count FROM request_admin WHERE card=? AND statusAdmin=?";
     public static final String INSERT_REQUEST_ADMIN = "INSERT INTO request_admin (card, cardStatus, statusAdmin) values (?, ?, ?)";
     public static final String GET_COUNT_ALL_CARD_FOR_REQUEST_ADMIN = "SELECT count(*) FROM cards INNER JOIN request_admin ON cards.number = request_admin.card WHERE request_admin.statusAdmin = ?";
