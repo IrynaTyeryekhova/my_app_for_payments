@@ -61,7 +61,7 @@
        </div>
 
        <div>
-           <form th:action="#{form.actionCardStatusChangeAdminRequest}" th:method="post">
+           <form th:action="#{form.actionAdminCardsMenu.statusChangeRequestAdmin}" th:method="post">
                <table class= "tablePayments" style="font-family: Arial, sans-serif; width: 42%;text-align: center; margin-left: 10%; margin-top: 16%; position: fixed;  z-index: 1; font-weight: 100; padding: 60px" border = "3">
                    <tr>
                        <th th:text="#{card.info.numberCardForTable}" > </th>
@@ -72,7 +72,7 @@
                        <td th:text="${sort.getNumber()}"> </td>
                        <td th:text="${sort.getBalance()}"> </td>
                        <td th:text="${sort.getValidityPeriod()}"> </td>
-                       <td> <button style="width: 130px;" type="submit" class="btn btn-blacktwo" name = "cardStatusSend" th:value = "${sort.getNumber()}" th:text="#{button.unblock}" ></button></td>
+                       <td> <button style="width: 130px;" type="submit" class="btn btn-blacktwo" name = "cardAdminChangeStatus" th:value = "${sort}" th:text="#{button.unblock}" ></button></td>
                    </tr>
                </table>
            </form>
