@@ -88,9 +88,12 @@ public class InfoMessage {
         } else if (message.equals("paymentSentCardBlockErr")) {
             infoMessage = "message.paymentSentCardBlockErr";
             infoMessageMenu = "message.menu.sendingPayment";
+        } else if (message.equals("sendRequestAdminErrValidityPeriod")) {
+            infoMessage = "message.sendRequestAdminErrValidityPeriod";
+            infoMessageMenu = "message.menu.unlockingCard";
         }
 
-            session.setAttribute("infoMessage", infoMessage);
+        session.setAttribute("infoMessage", infoMessage);
         session.setAttribute("infoMessageMenu", infoMessageMenu);
 
         if (adminPage.equals("true")) response = "adminInformationPage";
