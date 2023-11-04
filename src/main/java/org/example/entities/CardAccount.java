@@ -29,27 +29,27 @@ public class CardAccount {
 
     public CardAccount() {}
 
-    public CardAccount(String number, double balance, String validityPeriod) {
-        this.number = number;
-        this.balance = balance;
-        this.validityPeriod = validityPeriod;
-    }
-
-    public CardAccount(String number, double balance, String validityPeriod, String password) {
-        this.number = number;
-        this.balance = balance;
-        this.validityPeriod = validityPeriod;
-        this.password = password;
-    }
-
-    public CardAccount(String number, double balance, String validityPeriod, String password, String statusCard, String client) {
-        this.number = number;
-        this.balance = balance;
-        this.validityPeriod = validityPeriod;
-        this.password = password;
-        this.statusCard = statusCard;
-        this.client = client;
-    }
+//    public CardAccount(String number, double balance, String validityPeriod) {
+//        this.number = number;
+//        this.balance = balance;
+//        this.validityPeriod = validityPeriod;
+//    }
+//
+//    public CardAccount(String number, double balance, String validityPeriod, String password) {
+//        this.number = number;
+//        this.balance = balance;
+//        this.validityPeriod = validityPeriod;
+//        this.password = password;
+//    }
+//
+//    public CardAccount(String number, double balance, String validityPeriod, String password, String statusCard, String client) {
+//        this.number = number;
+//        this.balance = balance;
+//        this.validityPeriod = validityPeriod;
+//        this.password = password;
+//        this.statusCard = statusCard;
+//        this.client = client;
+//    }
 
     public String getNumber() {
         return number;
