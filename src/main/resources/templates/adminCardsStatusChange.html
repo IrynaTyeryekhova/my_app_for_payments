@@ -68,11 +68,11 @@
                        <th th:text="#{card.info.balanceForTable}" > </th>
                        <th th:text="#{card.info.validityPeriodForTable}" > </th>
                    </tr>
-                   <tr th:each="sort : ${session.cardsForRequestAdmin}">
-                       <td th:text="${sort.getNumber()}"> </td>
+                   <tr th:each="sort : ${session.cardsForRequestAdmin}" >
+                       <td th:text="${sort.getNumber()}"></td>
                        <td th:text="${sort.getBalance()}"> </td>
                        <td th:text="${sort.getValidityPeriod()}"> </td>
-                       <td> <button style="width: 130px;" type="submit" class="btn btn-blacktwo" name = "cardAdminChangeStatus" th:value = "${sort}" th:text="#{button.unblock}" ></button></td>
+                       <td> <button style="width: 130px;" type="submit" class="btn btn-blacktwo" name="card" th:value="${sort.getNumber()}" th:text="#{button.unblock}" ></button></td>
                    </tr>
                </table>
            </form>
