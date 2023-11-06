@@ -81,7 +81,7 @@ public class DBCardService {
         return result;
     }
 
-    public int requestAdminChange(int cardNumber, int statusRequest) {
+    public int requestAdminChange(String cardNumber, int statusRequest) {
         int result = 0;
         try {result = jdbcTemplate.update(DBQuery.REQUEST_ADMIN_CHANGE, statusRequest, cardNumber);}
         catch (DataAccessException ignored) {}

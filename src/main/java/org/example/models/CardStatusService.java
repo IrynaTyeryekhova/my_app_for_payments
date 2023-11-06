@@ -5,15 +5,13 @@ import org.example.dbServices.Statuses;
 import org.example.entities.CardAccount;
 import org.example.services.Service;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 public class CardStatusService {
 //    public static final Logger LOG=Logger.getLogger(CardStatusService.class.getName());
 
-    public String cardStatusMake(HttpServletRequest request, DBCardService cardService) throws ServletException, IOException{
+    public String cardStatusMake(HttpServletRequest request, DBCardService cardService) {
 //        LOG.info("CardStatusService is starting");
         HttpSession session = request.getSession();
         Service service = new Service();
@@ -50,24 +48,7 @@ public class CardStatusService {
                 }else return "redirect:/infoMessage?message=sendRequestAdminErrPassword";
             }
     }
-
-//    private HttpServletRequest statusChangeRequestAdmin(String cardNumber, HttpServletRequest request) throws ServletException, IOException {
-//        DBCardService cardService = DBCardService.getInstance();
-//        CardAccount cardAccount = cardService.getCardInfo(cardNumber);
-//
-//        if (cardAccount == null) request.getRequestDispatcher("/infoMessage?lang=" + language + "&message=error").forward(req,resp);
-//        else if ((cardAccount.getValidityPeriod()).compareTo(LocalDate.now().toString()) < 0) {
-//            req.getRequestDispatcher("/infoMessage?lang=" + language + "&message=sendRequestAdminErrValidityPeriod&adminPage=true").forward(req, resp);
-//        } else {
-//            int updateResult = cardService.updateCardStatus(cardNumber, Statuses.UNBLOCK, "false");
-//            int sendRequest = cardService.updateRequestAdmin(cardAccount.getId(), Statuses.DONE);
-//
-//            if (updateResult == 1 && sendRequest == 1) req.getRequestDispatcher("/infoMessage?lang=" + language + "&message=status&adminPage=true").forward(req, resp);
-//            else req.getRequestDispatcher("/infoMessage?lang=" + language + "&message=sendRequestAdminErr&adminPage=true").forward(req, resp);
-//        }
-//        return req;
-//    }
-//
+    
 //    private HttpServletRequest statusChangeAdmin(String cardNumber, HttpServletRequest request) throws ServletException, IOException {
 //        DBCardService cardService = DBCardService.getInstance();
 //        CardAccount cardAccount = cardService.getCardInfo(cardNumber);
