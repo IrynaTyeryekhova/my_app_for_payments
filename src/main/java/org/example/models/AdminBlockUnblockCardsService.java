@@ -1,14 +1,11 @@
 package org.example.models;
 
 import org.example.dbServices.DBCardService;
-import org.example.dbServices.DBClientService;
 import org.example.entities.CardAccount;
 import org.example.services.PaginationService;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.List;
 
 public class AdminBlockUnblockCardsService {
@@ -21,7 +18,7 @@ public class AdminBlockUnblockCardsService {
 
         int findCountAllCard = cardService.getCountAllCard();
         if(findCountAllCard != -1) paginationService.paginationMake(request, findCountAllCard);
-        else return "/infoMessage?message=error";
+        else return "redirect:/infoMessage?message=error";
 
         Integer limit = Integer.valueOf(String.valueOf(session.getAttribute("selectCountShow")));
         Integer numberPage = Integer.valueOf(String.valueOf(session.getAttribute("numberPage")));
@@ -32,7 +29,7 @@ public class AdminBlockUnblockCardsService {
 
         session.setAttribute("cards", cards);
 
-        if(cards == null) return "/infoMessage?message=error";
+        if(cards == null) return "redirect:/infoMessage?message=error";
         return "adminAllCardsStatusChange";
     }
 }

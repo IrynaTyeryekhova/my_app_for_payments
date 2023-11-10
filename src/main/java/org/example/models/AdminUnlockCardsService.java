@@ -19,7 +19,7 @@ public class AdminUnlockCardsService {
 
         int countCardsForRequestAdmin = cardService.getCountAllCardForRequestAdmin(Statuses.NEW);
         if (countCardsForRequestAdmin != -1) paginationService.paginationMake(request, countCardsForRequestAdmin);
-        else return "/infoMessage?message=error";
+        else return "redirect:/infoMessage?message=error";
 
         Integer limit = Integer.valueOf(String.valueOf(session.getAttribute("selectCountShow")));
         Integer numberPage = Integer.valueOf(String.valueOf(session.getAttribute("numberPage")));
@@ -30,7 +30,7 @@ public class AdminUnlockCardsService {
 
         session.setAttribute("cardsForRequestAdmin", cardsForRequestAdmin);
 
-        if(cardsForRequestAdmin == null) return "/infoMessage?message=error";
+        if(cardsForRequestAdmin == null) return "redirect:/infoMessage?message=error";
         else return "adminCardsStatusChange";
     }
 }
