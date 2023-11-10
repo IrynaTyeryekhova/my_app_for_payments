@@ -48,27 +48,7 @@ public class CardStatusService {
                 }else return "redirect:/infoMessage?message=sendRequestAdminErrPassword";
             }
     }
-    
-//    private HttpServletRequest statusChangeAdmin(String cardNumber, HttpServletRequest request) throws ServletException, IOException {
-//        DBCardService cardService = DBCardService.getInstance();
-//        CardAccount cardAccount = cardService.getCardInfo(cardNumber);
-//        String status = "";
-//        if (cardAccount != null) { status = cardAccount.getStatus();}
-//
-//        if(cardAccount == null) request.getRequestDispatcher("/infoMessage?lang=" + language + "&message=error").forward(req,resp);
-//        else if ((cardAccount.getValidityPeriod()).compareTo(LocalDate.now().toString()) < 0 && status.equals("block")) {
-//            request.getRequestDispatcher("/infoMessage?lang=" + language + "&message=sendRequestAdminErrValidityPeriod&adminPage=true").forward(req, resp);
-//        } else {
-//            int updateResult = 0;
-//
-//            if(status.equals("block")) updateResult = cardService.updateCardStatus(cardNumber, Statuses.UNBLOCK, "false");
-//            else if(status.equals("unblock")) updateResult = cardService.updateCardStatus(cardNumber, Statuses.BLOCK, "false");
-//
-//            if (updateResult == 1) req.getRequestDispatcher("/infoMessage?lang=" + language + "&message=status&adminPage=true").forward(req, resp);
-//            else req.getRequestDispatcher("/infoMessage?lang=" + language + "&message=sendRequestAdminErr&adminPage=true").forward(req, resp);
-//        }
-//       return req;
-//    }
+
 //    private HttpServletRequest clientChangeAdmin(String email, String language, HttpServletRequest req, HttpServletResponse resp) throws DBException, ServletException, IOException {
 //        DBClientService clientService = DBClientService.getInstance();
 //        Client client = clientService.getClientInfo(email);

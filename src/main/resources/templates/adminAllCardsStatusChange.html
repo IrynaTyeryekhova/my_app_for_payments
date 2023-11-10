@@ -75,7 +75,7 @@
                        <td th:text="${sort.getBalance()}"> </td>
                        <td th:text="${sort.getValidityPeriod()}"> </td>
                        <td th:text="#{${sort.getStatusCard()}}" > </td>
-                       <td> <button style="width: 130px;" type="submit" class="btn btn-blacktwo" name = "cardStatusSend" th:value = "${sort.getNumber()}" th:text="#{button.statusChange}" ></button></td>
+                       <td> <button style="width: 130px;" type="submit" class="btn btn-blacktwo" name = "card" th:value = "${sort.getNumber()}" th:text="#{button.statusChange}" ></button></td>
                    </tr>
                </table>
            </form>
