@@ -2,13 +2,18 @@ package org.example.controllers;
 
 import org.example.dbServices.DBCardService;
 import org.example.dbServices.DBClientService;
+import org.example.entities.CardAccount;
+import org.example.models.AdminBlockUnblockCardsService;
+import org.example.models.AdminStatusChangeService;
 import org.example.models.AdminUnlockCardsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Component
 @RequestMapping("/adminCardsMenu")
@@ -43,5 +48,20 @@ public class AdminCardMenuController {
     @PostMapping("/requestsToUnlockCards")
     public String adminRequestsToUnlockCardsPost(HttpServletRequest request) {
         return new AdminUnlockCardsService().unlockCard(request, cardService);
+    }
+
+    @GetMapping("/blockUnblockCards")
+    public String adminBlockUnblockCardsGet(HttpServletRequest request) {
+        return new AdminBlockUnblockCardsService().blockUnblockCard(request, cardService);
+    }
+
+    @PostMapping("/blockUnblockCards")
+    public String adminBlockUnblockCardsPost(HttpServletRequest request) {
+        return new AdminBlockUnblockCardsService().blockUnblockCard(request, cardService);
+    }
+
+    @PostMapping ("/statusChangeRequestAdmin")
+    public String adminRequestsToStatusChangePost(HttpServletRequest request) {
+        return new AdminStatusChangeService().cardStatusChange(request, cardService);
     }
 }
