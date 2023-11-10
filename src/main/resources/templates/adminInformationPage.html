@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="${param.lang}" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="#{text.cards}"></title>
+    <link type="text/css" th:href="@{/static/css/stylesheet.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
+</head>
+  <body>
+   <div class="sidenav">
+       <div class="login-main-text">
+           <h2><p th:text="#{name.app}"></p>
+               <th:block th:utext="#{${session.infoMessageMenu}}" >infoMessage</th:block>
+               _____________________________________________ <br>
+           </h2>
+
+           <p th:text="#{button.requestsToUnlockCards}" ></p>
+           <form th:action="#{form.actionAdminCardsMenu.requestsToUnlockCards}" th:method="get">
+               <button type="submit" class="btn btn-black" th:text="#{button.review}" > </button>
+           </form>
+
+           <p th:text="#{button.blockingUnblockingOfCards}" ></p>
+           <form th:action="#{form.actionAdminCardsMenu.blockUnblockCards}" th:method="get">
+               <button type="submit" class="btn btn-black" th:text="#{button.goTo}" ></button>
+           </form>
+
+           <p th:text="#{button.blockingUnblockingClients}" ></p>
+           <form th:action="#{form.actionAdminCardsMenu.blockUnblockClients}" th:method="get">
+               <button type="submit" class="btn btn-black" th:text="#{button.goTo}" ></button>
+           </form>
+       </div>
+   </div>
+   <div class="main">
+       <form th:action="#{form.actionExit}" th:method="post">
+           <button style = "margin-left: 85%; margin-top: 1%;"type="submit" class="btn btn-blacktwo" th:text="#{button.logOut}" ></button>
+       </form>
+       <h3 style="font-family: Arial, sans-serif; width: 30%;text-align: center; margin-left: 10%; margin-top: 12%; position: fixed;  z-index: 1; font-weight: 100; padding: 60px" th:text="#{${session.infoMessage}}" ><br>
+       </h3>
+   </div>
+  </body>
+</html>
