@@ -19,7 +19,7 @@ public class AdminUnlockCardsService {
 
         int countCardsForRequestAdmin = cardService.getCountAllCardForRequestAdmin(Statuses.NEW);
         if (countCardsForRequestAdmin != -1) paginationService.paginationMake(request, countCardsForRequestAdmin);
-
+        else return "/infoMessage?message=error";
 
         Integer limit = Integer.valueOf(String.valueOf(session.getAttribute("selectCountShow")));
         Integer numberPage = Integer.valueOf(String.valueOf(session.getAttribute("numberPage")));
