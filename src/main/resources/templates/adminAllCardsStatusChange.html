@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="${param.lang}" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="#{text.cards}"></title>
+    <link type="text/css" th:href="@{/static/css/stylesheet.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
+</head>
+  <body>
+   <div class="sidenav">
+       <div class="login-main-text">
+           <h2><p th:text="#{name.app}"></p>
+               <p th:text="#{name.app.cardUnlockingBlockingMenu}" ></p>
+               _____________________________________________ <br>
+           </h2>
+           <p th:text="#{name.app.action.sort}" >
+               <form style="font-size: xx-small; margin: 0 0 0 0" th:action="#{form.actionAdminCardsMenu.blockUnblockCards}" th:method="get">
+                   <select id="selectParamSortCards" class="btn btn-black-option" name="selectParamSortCards">
+                       <option style="font-size: small; margin: 0 0 0 0" th:each="sort : ${session.listParamSortCards}" th:selected="${sort == session.selectParamSortCards}"  th:value="${sort}" th:utext="#{${sort}}" > </option>
+                   </select>
+
+                   <select id="selectParamSortType" class="btn btn-black-option" name="selectParamSortType">
+                       <option style="font-size: small; margin: 0 0 0 0" th:each="sort : ${session.listParamSortType}" th:selected="${sort == session.selectParamSortType}" th:value="${sort}" th:utext="#{${sort}}" > </option>
+                   </select>
+                   <button type="submit" class="btn btn-black-option" th:text="#{button.apply}" ></button>
+               </form>
+           </p>
+           <p th:text="#{name.app.action.showBy}" >
+               <form style="font-size: xx-small; margin: 0 0 0 0;" th:action="#{form.actionAdminCardsMenu.blockUnblockCards}" th:method="get">
+                   <select id="selectCountShow" class="btn btn-black-option" name="selectCountShow">
+                       <option style="font-size: small; margin: 0 0 0 0" th:each="sort : ${session.listCountShow}" th:selected="${sort == session.selectCountShow}" th:value="${sort}" th:utext="${sort}" ></option>
+                   </select>
+                   <button type="submit" class="btn btn-black-option" th:text="#{button.apply}" ></button>
+               </form>
+           </p>
+           _____________________________________________ <br>
+
+           <p th:text="#{button.menu}"></p>
+
+           <form th:action="#{form.actionAdminCardsMenu}" th:method="get">
+               <button type="submit" class="btn btn-black" th:text="#{button.menu}" ></button>
+           </form>
+
+           _____________________________________________ <br>
+           <p th:text="#{languageChangeText}" ></p>
+
+           <form th:action="#{languageChangeLink}"  th:method="post">
+               <button type="submit" class="btn btn-black" th:text="#{languageChangeButton}" ></button>
+           </form>
+       </div>
+   </div>
+   <div class="main">
+       <div >
+           <form th:action="#{form.actionExit}" th:method="post">
+               <button style = "margin-left: 85%; margin-top: 1%;"type="submit" class="btn btn-blacktwo" th:text="#{button.logOut}" ></button>
+           </form>
+           <form th:action="#{form.actionAdminCardsMenu.blockUnblockCards}"  th:method="get">
+               <button style = " padding: 0px 0px 0px 0px; margin: 14% 0 0 23%;position: fixed;  z-index: 1; font-weight: 100; padding: 6px" type="submit" class="btn btn-blacktwo" name = "previousPage" th:value = "1" th:text="#{button.back}" ></button>
+               <button style = "background-color: #000 !important; color: #FFF; width: 30px; padding: 0px 0px 0px 0px; margin: 14% 0 0 30.55%;position: fixed;  z-index: 1; font-weight: 100; padding: 5px" th:text="${session.numberPage}"></button>
+               <button style = " padding: 0px 0px 0px 0px; margin: 14% 0 0 33%;position: fixed;  z-index: 1; font-weight: 100; padding: 6px" type="submit" class="btn btn-blacktwo" name = "nextPage" th:value = "1" th:text="#{button.next}" ></button>
+           </form>
+       </div>
+
+       <div>
+           <form th:action="#{form.actionAdminCardsMenu.statusChange}" th:method="post">
+               <table class= "tablePayments" style="font-family: Arial, sans-serif; width: 42%;text-align: center; margin-left: 10%; margin-top: 18%; position: fixed;  z-index: 1; font-weight: 100; padding: 60px" border = "3">
+                   <tr>
+                       <th th:text="#{card.info.numberCardForTable}"> </th>
+                       <th th:text="#{card.info.balanceForTable}"> </th>
+                       <th th:text="#{card.info.validityPeriodForTable}"> </th>
+                       <th th:text="#{card.info.statusForTable}"> </th>
+                   </tr>
+                   <tr th:each="sort : ${session.cards}">
+                       <td th:text="${sort.getNumber()}"> </td>
+                       <td th:text="${sort.getBalance()}"> </td>
+                       <td th:text="${sort.getValidityPeriod()}"> </td>
+                       <td th:text="#{${sort.getStatusCard()}}" > </td>
+                       <td> <button style="width: 130px;" type="submit" class="btn btn-blacktwo" name = "cardStatusSend" th:value = "${sort.getNumber()}" th:text="#{button.statusChange}" ></button></td>
+                   </tr>
+               </table>
+           </form>
+       </div>
+   </div>
+  </body>
+</html>
