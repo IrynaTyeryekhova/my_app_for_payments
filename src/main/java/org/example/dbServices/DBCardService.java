@@ -124,7 +124,7 @@ public class DBCardService {
         try {
             cards = jdbcTemplate.query("SELECT * FROM cards " +
                                            "INNER JOIN statuses " +
-                                           "ON cards.status = statuses.id " +
+                                           "ON cards.statusCard = statuses.id " +
                                            "ORDER BY " + orderBy + " " +
                                            typeSort + " limit ? offset ?",
                                            new Object[]{limit, offset},
